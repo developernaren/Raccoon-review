@@ -1,4 +1,4 @@
-<?php include ("includes/header.php");  ?> 
+<?php include ("includes/header.php");  ?>
 <section>
     <!-- About Raccoons   -->
 	<div class="about-rac">
@@ -12,7 +12,7 @@
                     The colloquial abbreviation coon is used in words like coonskin for fur clothing and in phrases like old coon as a self-designation of trappers.In the 1830s, the U.S. Whig Party used the raccoon as an emblem, causing them to be pejoratively known as 'coons' by their political opponents, who saw them as too sympathetic to African-Americans. Soon after that it became an ethnic slur,[14] especially in use between 1880 and 1920 (see coon song), and the term is still considered offensive.
 
                     The original habitats of the raccoon are deciduous and mixed forests, but due to their adaptability they have extended their range to mountainous areas, coastal marshes, and urban areas, where some homeowners consider them to be pests. As a result of escapes and deliberate introductions in the mid-20th century, raccoons are now also distributed across mainland Europe, Caucasia, and Japan.
-                    
+
                 </p>
 		</div>
 		<div class="about-rac-image">
@@ -22,18 +22,18 @@
 			</figure>
 		</div>
 	</div>
-	
+
     <!-- Main Raccoons contents with sorting  -->
-    
+
     <div class="rac-container">
         <div class="rac-info">
             <span>Total result <strong>: 45</strong> </span>
                 <span>
-                   Sort By : 
+                   Sort By :
                    <select id="sort_option" onchange="myOptions()">
                         <option value="name">Name</option>
                         <option value="rating">Rating</option>
-                   </select> 
+                   </select>
                    <select name="nameSort" id="nameSort">
                         <option value="asc">Ascending</option>
                         <option value="desc">Descending</option>
@@ -41,10 +41,10 @@
                    <select name="ratingSort" id="ratingSort">
                         <option value="highest">Highest</option>
                         <option value="lowest">Lowest</option>
-                   </select> 
-              </span>       
+                   </select>
+              </span>
         </div>
-        
+
         <div class="rac-list">
             <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
             <p>Name : <strong>Raccoon</strong></p>
@@ -54,7 +54,7 @@
             <br>
             <a href="detail.php?id=4">Detail about Raccon</a>
         </div>
-        
+
         <div class="rac-list">
             <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
             <p>Name : <strong>Raccoon</strong></p>
@@ -64,7 +64,7 @@
             <br>
             <a href="detail">Detail about Raccon</a>
         </div>
-        
+
         <div class="rac-list">
             <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
             <p>Name : <strong>Raccoon</strong></p>
@@ -74,7 +74,7 @@
             <br>
             <a href="detail">Detail about Raccon</a>
         </div>
-        
+
         <div class="rac-list">
             <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
             <p>Name : <strong>Raccoon</strong></p>
@@ -84,7 +84,7 @@
             <br>
             <a href="detail">Detail about Raccon</a>
         </div>
-        
+
         <div class="rac-list">
             <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
             <p>Name : <strong>Raccoon</strong></p>
@@ -94,7 +94,7 @@
             <br>
             <a href="detail">Detail about Raccon</a>
         </div>
-        
+
         <div class="rac-list">
             <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
             <p>Name : <strong>Raccoon</strong></p>
@@ -104,7 +104,7 @@
             <br>
             <a href="detail">Detail about Raccon</a>
         </div>
-        
+
         <div class="rac-pagination">
                 <ul>
                     <span>Showing Per Page <strong>: 10</strong> </span>
@@ -114,11 +114,11 @@
                     <li><a href="">3</a></li>
                     <li><a href="">4</a></li>
                     <li><a href="">5</a></li>
-                </ul>       
+                </ul>
         </div>
-        
+
     </div>
-    
+
 </section>
 <script>
     document.getElementById("nameSort").style.display = "inline";
