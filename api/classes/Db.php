@@ -3,7 +3,7 @@
 class Db
 {
 
-    const DB_NAME = "racoon_review";
+    const DB_NAME = "db_reccoon_review";
     const DB_HOST = "localhost";
     const DB_USERNAME = "root";
     const DB_PASSWORD = "";
@@ -13,11 +13,12 @@ class Db
 
     function getDB()
     {
-        return new mysqli(self::DB_HOST, self::DB_USERNAME, self::DB_PASSWORD, self::DB_PASSWORD);
+        return new mysqli(self::DB_HOST, self::DB_USERNAME, self::DB_PASSWORD, self::DB_NAME);
     }
 
     function insert( array $data)
     {
+
 
         $queryString = "insert into "
             . $this->table
@@ -25,7 +26,10 @@ class Db
             . implode(',', array_keys($data))
             . " ) values('" . implode("','", array_values($data)) . "')";
 
-        $this->getDB()->query($queryString);
+
+        $db = $this->getDB();
+        $db->query($queryString);
+        $db->close();
 
     }
 
@@ -36,10 +40,26 @@ class Db
 
     }
 
-    function getAll($table)
+    function getAll()
     {
 
+        $db = $this->getDB();
+        $result = $db->query('select * from ' . $this->table );
+        $db->close();
+        return $result;
+
     }
+
+    function getById( $id )
+    {
+        $db = $this->getDB();
+        $result = $db->query('select * from ' . $this->table.' where id = '.$id );
+        $db->close();
+        return $result;
+    }
+
+
+    
 
 
 }
