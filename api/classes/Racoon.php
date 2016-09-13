@@ -14,6 +14,14 @@ class Racoon extends Db
     private $id;
     protected $table = "racoons";
 
+
+    function __construct( $id = '',$name = '', $imageUrl = '')
+    {
+        $this->setId( $id );
+        $this->setName( $name );
+        $this->setImageUrl( $imageUrl );
+    }
+
     /**
      * @return mixed
      */
@@ -66,5 +74,17 @@ class Racoon extends Db
 
         $this->insert( ['name' => $this->name, 'image_url' => $this->imageUrl ] );
 
+    }
+
+    function getAllRaccoons()
+    {
+        $result = $this->getAll();
+        $resultArr = [];
+        while( $row = $result->fetch_assoc() ) {
+            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $resultArr[] = $raccoon;
+        }
+
+        return $resultArr;
     }
 }

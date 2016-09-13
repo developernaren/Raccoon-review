@@ -102,10 +102,10 @@ class Review extends Db
             $reviewsArr[] = $review;
 
         }
-        return $reviewsArr;
-        
-
+        return json_encode( $reviewsArr );
     }
+
+
 
 
 }
