@@ -1,30 +1,19 @@
 <?php
-
+//
+//
+//echo "<pre>";
+//
+//print_r( $_SERVER );
+//die;
 require_once 'classes/Db.php';
 require_once 'classes/Review.php';
+require_once 'classes/Route.php';
+require_once 'classes/Racoon.php';
 
-$requestUri = $_SERVER['REQUEST_URI'];
 
+Route::get('raccoons', 'Racoon@getAllRaccoons');
+Route::get('review', 'Review@getAllReviews');
 
-
-if( $requestUri == "/review/api/insert" ) {
-    
-//    $review = new Review();
-//    $review->setKey(1);
-//    $review->setName("Narendra");
-//    $review->setReviewText("this is aweoine");
-//    $review->setRacoonId('1');
-//    $review->save();
-//    print_r( $review );
-
-    $review = new Review();
-
-    $data['data'] = $review->getAllReviews();
-    die( json_encode( $data ) );
-    die;
-    
-}
-
-function returnJson($data){
-    return(json_encode($data));
-}
+$server = $_SERVER;
+$route = new Route( $server);
+echo $route->execute();
