@@ -94,16 +94,17 @@ class Review extends Db
 
             $review = new self();
             $review->setKey( $row['viewer_key']);
-//            $review->setId( $row['id']);
-//            $review->setName("Narendra");
-//            $review->setReviewText("this is aweoine");
-//            $review->setRacoonId('1');
-//            $review->save();
+            $review->setId( $row['id']);
+            $review->setName("Narendra");
+            $review->setReviewText("this is aweoine");
+            $review->setRacoonId('1');
             $reviewsArr[] = $review;
 
         }
         return json_encode( $reviewsArr );
     }
+
+    
 
 
 

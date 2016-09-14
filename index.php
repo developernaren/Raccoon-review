@@ -1,4 +1,13 @@
-<?php include ("includes/header.php");  ?>
+<?php
+
+require ('api/classes/Route.php');
+include ("includes/header.php");
+include ("api/index.php");
+$result = $route->execute();
+$review = new Racoon();
+$review->getTotal();
+
+?>
 <section>
     <!-- About Raccoons   -->
 	<div class="about-rac">
@@ -44,67 +53,23 @@
                    </select>
               </span>
         </div>
+  
+        <?php while($row = $result->fetch_assoc()) {
+            $image = $row['image_url'];
+            $final_img_url = str_replace("/","\\",$image);
 
+        ?>
         <div class="rac-list">
-            <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
-            <p>Name : <strong>Raccoon</strong></p>
+            <img src="<?php echo $final_img_url; ?>" alt="Procyan Lator">
+            <p>Name : <strong><?php echo $row['name']; ?></strong></p>
             <p>Review : <strong>45</strong></p>
             <br>
             <br>
             <br>
-            <a href="detail.php?id=4">Detail about Raccon</a>
+            <a href="detail.php?id=<?php echo $row['id']; ?>">Detail about Raccon</a>
         </div>
-
-        <div class="rac-list">
-            <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
-            <p>Name : <strong>Raccoon</strong></p>
-            <p>Review : <strong>45</strong></p>
-            <br>
-            <br>
-            <br>
-            <a href="detail">Detail about Raccon</a>
-        </div>
-
-        <div class="rac-list">
-            <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
-            <p>Name : <strong>Raccoon</strong></p>
-            <p>Review : <strong>45</strong></p>
-            <br>
-            <br>
-            <br>
-            <a href="detail">Detail about Raccon</a>
-        </div>
-
-        <div class="rac-list">
-            <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
-            <p>Name : <strong>Raccoon</strong></p>
-            <p>Review : <strong>45</strong></p>
-            <br>
-            <br>
-            <br>
-            <a href="detail">Detail about Raccon</a>
-        </div>
-
-        <div class="rac-list">
-            <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
-            <p>Name : <strong>Raccoon</strong></p>
-            <p>Review : <strong>45</strong></p>
-            <br>
-            <br>
-            <br>
-            <a href="detail">Detail about Raccon</a>
-        </div>
-
-        <div class="rac-list">
-            <img src="assets/images/Raccoon_Cudjoe_Key_Florida.jpg" alt="Procyan Lator">
-            <p>Name : <strong>Raccoon</strong></p>
-            <p>Review : <strong>45</strong></p>
-            <br>
-            <br>
-            <br>
-            <a href="detail">Detail about Raccon</a>
-        </div>
-
+        <?php }  ?>    
+        
         <div class="rac-pagination">
                 <ul>
                     <span>Showing Per Page <strong>: 10</strong> </span>
@@ -116,6 +81,7 @@
                     <li><a href="">5</a></li>
                 </ul>
         </div>
+        
 
     </div>
 

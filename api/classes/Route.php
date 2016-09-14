@@ -1,10 +1,13 @@
 <?php
 
+
 class Route {
 
     public static $routes = [
         'post' => [],
-        'get' => []
+        'get' => [],
+        'put' => [],
+        'delete' => []
     ];
 
     private $server;

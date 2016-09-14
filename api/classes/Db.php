@@ -50,12 +50,27 @@ class Db
 
     }
 
+    function totalResult () {
+        $db = $this->getDB();
+        $total = $db->query('select count(id) from'.$this->table );
+        $db->close();
+        return $total;
+
+    }
+
     function getById( $id )
     {
+        $db = $this->getDB();
+        $result = $db->query('select sum(review.rating) from'.$this->table.'inner join review on '.$this->table.'.id = review.raccoon_id where '.$this->table.'.id='.$id);
+        $db->close();
+        return $result;
+    }
+    function total_review( $id ) {
         $db = $this->getDB();
         $result = $db->query('select * from ' . $this->table.' where id = '.$id );
         $db->close();
         return $result;
+        
     }
 
 

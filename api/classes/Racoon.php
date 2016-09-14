@@ -12,7 +12,7 @@ class Racoon extends Db
     private $name;
     private $imageUrl;
     private $id;
-    protected $table = "racoons";
+    protected $table = "tbl_raccoon";
 
 
     function __construct( $id = '',$name = '', $imageUrl = '')
@@ -79,12 +79,25 @@ class Racoon extends Db
     function getAllRaccoons()
     {
         $result = $this->getAll();
-        $resultArr = [];
-        while( $row = $result->fetch_assoc() ) {
-            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
-            $resultArr[] = $raccoon;
-        }
+//        $resultArr = [];
+//        while( $row = $result->fetch_assoc() ) {
+//            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+//            $resultArr[] = $raccoon;
+//        }
+//        $result->free();
+//        return $resultArr;
+        return $result;
 
-        return $resultArr;
+    }
+
+    function getTotal()
+    {
+        $total = $this->totalResult();
+        return $total;
+            
+    }
+    function getTotalReview($id){
+        $review = $this->total_review($id);
+        return $review;
     }
 }
