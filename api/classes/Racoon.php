@@ -9,9 +9,9 @@
 class Racoon extends Db
 {
 
-    private $name;
-    private $imageUrl;
-    private $id;
+    public $name;
+    public $imageUrl;
+    public $id;
     protected $table = "tbl_raccoon";
 
 
@@ -79,14 +79,12 @@ class Racoon extends Db
     function getAllRaccoons()
     {
         $result = $this->getAll();
-//        $resultArr = [];
-//        while( $row = $result->fetch_assoc() ) {
-//            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
-//            $resultArr[] = $raccoon;
-//        }
-//        $result->free();
-//        return $resultArr;
-        return $result;
+        $resultArr = [];
+        while( $row = $result->fetch_assoc() ) {
+            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $resultArr[] = $raccoon;
+        }
+        return $resultArr;
 
     }
 
