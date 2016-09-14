@@ -13,6 +13,7 @@ class Racoon extends Db
     public $imageUrl;
     public $id;
     public $reviews;
+    public $total;
     protected $table = "tbl_raccoon";
 
 
@@ -92,6 +93,8 @@ class Racoon extends Db
     function getTotal()
     {
         $total = $this->totalResult();
+        $row = $total->fetch_assoc();
+        $this->total = $row['cnt'];
         return $total;
             
     }
@@ -106,6 +109,7 @@ class Racoon extends Db
         $row = $result->fetch_assoc();
         $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
         $raccoon->getReviews();
+        $raccoon->getTotal();
         die( json_encode( $raccoon ) );
 
     }

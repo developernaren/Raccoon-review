@@ -52,7 +52,7 @@ class Db
 
     function totalResult () {
         $db = $this->getDB();
-        $total = $db->query('select count(id) from'.$this->table );
+        $total = $db->query('select count(id) as cnt from'.$this->table );
         $db->close();
         return $total;
 
