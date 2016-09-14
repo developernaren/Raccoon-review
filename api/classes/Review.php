@@ -121,7 +121,6 @@ class Review extends Db
         return json_encode( $reviewsArr );
     }
 
-    
 
 
 

@@ -61,16 +61,25 @@ class Db
     function getById( $id )
     {
         $db = $this->getDB();
-        $result = $db->query('select sum(review.rating) from'.$this->table.'inner join review on '.$this->table.'.id = review.raccoon_id where '.$this->table.'.id='.$id);
+        $query = 'select * from '.$this->table.' where id='.$id;
+        $result = $db->query( $query );
         $db->close();
         return $result;
     }
     function total_review( $id ) {
         $db = $this->getDB();
-        $result = $db->query('select * from ' . $this->table.' where id = '.$id );
+        $result = $db->query('select * from reviews where raccoon_id = '.$id );
         $db->close();
         return $result;
         
+    }
+
+    function getRelated( $table, $id, $column ) {
+
+        $db = $this->getDB();
+        $result = $db->query('select * from '. $table .' where '. $column .'= '.$id );
+        $db->close();
+        return $result;
     }
 
 

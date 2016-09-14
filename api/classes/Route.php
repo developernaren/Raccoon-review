@@ -64,6 +64,7 @@ class Route {
                 }
             }
         }
+        $buildUriStr = ltrim($buildUriStr, '/');
         $retArr = explode('@', $routesArr[$buildUriStr] );
         $retArr[] = $param;
         return $retArr;
