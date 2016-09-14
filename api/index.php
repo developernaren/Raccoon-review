@@ -10,6 +10,8 @@ Route::get('raccoons', 'Racoon@getAllRaccoons');
 Route::get('', 'Racoon@getAllRaccoons');
 Route::get('home', 'Racoon@getAllRaccoons');
 Route::get('review', 'Review@getAllReviews');
+Route::get('raccoon/{num}', 'Racoon@getOne');
+
 
 
 $server = $_SERVER;
