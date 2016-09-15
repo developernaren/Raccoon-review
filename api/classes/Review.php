@@ -9,7 +9,24 @@ class Review extends Db
     public $key;
     public $reviewText;
     public $racoonId;
+    public $rating;
     public $id;
+
+    /**
+     * @return mixed
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param mixed $rating
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+    }
 
     /**
      * @return mixed
