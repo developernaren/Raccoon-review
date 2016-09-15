@@ -90,13 +90,34 @@ class Racoon extends Db
 
     }
 
+    function sortByAsc()
+    {
+        $result = $this->getBySortAsc();
+        
+        while($row = $result->fetch_assoc()) {
+            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $resultArr[] = $raccoon;
+        }
+        return $resultArr;
+    }
+
+    function sortByDesc()
+    {
+        $result = $this->getBySortDesc();
+        while($row = $result->fetch_assoc()) {
+            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $resultArr[] = $raccoon;
+        }
+        return $resultArr;
+    }
+
     function getTotal()
     {
         $total = $this->totalResult();
         $row = $total->fetch_assoc();
         $this->total = $row['cnt'];
         return $total;
-            
+
     }
     function getTotalReview($id){
         $review = $this->total_review($id);
@@ -110,7 +131,7 @@ class Racoon extends Db
         $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
         $raccoon->getReviews();
         $raccoon->getTotal();
-        die( json_encode( $raccoon ) );
+        return json_encode( $raccoon );
 
     }
 

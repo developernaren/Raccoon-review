@@ -1,21 +1,27 @@
-<?php include("includes/header.php"); ?>
+<?php
+include("includes/header.php");
+include ("api/index.php");
+$result = json_decode($response,true);
 
 
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/> 
+?>
+
+
+<link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
 <div class="detail-container">
    <div class="sum-list">
-        <p><strong><big>Detail</big></strong> of Raccoon Name</p>
+        <p><strong>Detail</strong> of Raccoon Name</p>
    </div>
    <section class="rac-detail">
-            <img src="assets/images/Curious_Raccoon.jpg" alt="">   
-        
+            <img src="assets/images/Curious_Raccoon.jpg" alt="">
+
         <div class="about-rac">
            <p><big><strong>Description </strong></big> </p>
             <p>Name              <strong> = Hello</strong> </p>
             <p>Total Review      <strong> = 45</strong> </p>
             <p>Average Rating    <strong> = 4</strong> </p>
         </div>
-        
+
     </section>
     <section class="user-review">
         <div class="user-comments">
@@ -70,7 +76,7 @@
          <div class="user-rac-rate" id="update-rac">
             <form action="api/api/">
                 <p>Username = <input type="text" value="rabin"> &nbsp;&nbsp;&nbsp;&nbsp;Rating  <input type="number" min="1" max="5" value="4" >
-                <input type="submit" value="update" > 
+                <input type="submit" value="update" >
                 <input type="button" onclick="hideUpdate()" value="Cancel">
                 </p>
                 <p> <textarea name="" id="" cols="30" rows="10"></textarea> </p>
@@ -98,7 +104,7 @@
                     <input type="radio" id="rate5" name="rate" value="5">
                     <label for="rate5">5</label>
                 </span>
-                
+
                 <p>
                 <textarea name="" id="" cols="30" rows="10">Hello</textarea>
                 </p>
@@ -106,13 +112,13 @@
                     <input type="submit"  value="Post">
                     <input type="button" onclick="hideBox()" id="cancel" value="Cancel">
                 </div>
-                
+
             </form>
         </div>
     </div>
 </div>
 <script>
-    
+
     function newSection()
     {
         document.getElementById("bt-comment").style.display = "none";
@@ -125,7 +131,7 @@
         document.getElementById("user-comment").style.display = "none";
         document.getElementById("mg-section").style.textAlign = "center";
         document.getElementById("bt-comment").style.display = "block";
-    
+
     }
     function changeOption(obj)
     {

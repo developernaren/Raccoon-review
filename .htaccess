@@ -1,4 +1,5 @@
 	RewriteEngine On
 
 	RewriteRule ^home/?$ index.php [NC,L]
-	RewriteRule ^detail/([0-9]+)/?$    detail.php?id=$1    [NC,L]
+	RewriteRule ^detail/?$ detail.php [NC,L]
+

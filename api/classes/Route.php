@@ -42,7 +42,7 @@ class Route {
         }
         return $newClass->$method();
     }
-    private function parseClassAndMethod() {
+    private function parseClassAndMethod() {    
 
         $method = $this->server['REQUEST_METHOD'];
         $base = str_replace('/index.php', '',$this->server['PHP_SELF']);
@@ -50,6 +50,7 @@ class Route {
         $routesArr = self::$routes[ strtolower( $method )  ];
         if ( !empty( $routesArr[$uri] )) {
             return explode('@', $routesArr[$uri] );
+
         }
         $uriArr = explode('/', $uri );
         $buildUriStr = '';

@@ -46,6 +46,7 @@ header .header-menu ul li a:hover
 {
     background-color: darkcyan;
     color: #fff;
+    cursor: pointer;
 }
 
 section .about-rac 
@@ -141,7 +142,6 @@ section .rac-container .rac-list
     box-sizing: border-box;
     border-left-width: 5px;
     clear: both;
-    width: 27%;
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 1px solid darkcyan;

@@ -16,7 +16,7 @@ class Db
         return new mysqli(self::DB_HOST, self::DB_USERNAME, self::DB_PASSWORD, self::DB_NAME);
     }
 
-    function insert( array $data)
+    function insert(array $data)
     {
 
 
@@ -44,46 +44,64 @@ class Db
     {
 
         $db = $this->getDB();
-        $result = $db->query('select * from ' . $this->table );
+        $result = $db->query('select * from ' . $this->table);
         $db->close();
+
         return $result;
 
     }
 
-    function totalResult () {
+    function totalResult()
+    {
         $db = $this->getDB();
-        $total = $db->query('select count(id) as cnt from review' );
+        $total = $db->query('select count(id) as cnt from review');
         $db->close();
         return $total;
 
     }
 
-    function getById( $id )
+    function getById($id)
     {
         $db = $this->getDB();
-        $query = 'select * from '.$this->table.' where id='.$id;
-        $result = $db->query( $query );
+        $query = 'select * from ' . $this->table . ' where id=' . $id;
+        $result = $db->query($query);
         $db->close();
         return $result;
     }
-    function total_review( $id ) {
+
+    function getBySortAsc()
+    {
         $db = $this->getDB();
-        $result = $db->query('select * from reviews where raccoon_id = '.$id );
+        $total = $db->query('select * from '.$this->table.' order by name asc');
         $db->close();
-        return $result;
-        
+        return $total;
     }
 
-    function getRelated( $table, $id, $column ) {
+    function getBySortDesc()
+    {
+        $db = $this->getDB();
+        $total = $db->query('select * from '.$this->table.' order by name desc');
+        $db->close();
+        return $total;
+    }
+
+    function total_review($id)
+    {
+        $db = $this->getDB();
+        $result = $db->query('select * from reviews where raccoon_id = ' . $id);
+        $db->close();
+        return $result;
+
+    }
+
+    function getRelated($table, $id, $column)
+    {
 
         $db = $this->getDB();
-        $result = $db->query('select * from '. $table .' where '. $column .'= '.$id );
+        $result = $db->query('select * from ' . $table . ' where ' . $column . '= ' . $id);
         $db->close();
         return $result;
     }
-
-
-    
 
 
 }
