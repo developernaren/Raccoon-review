@@ -20,9 +20,4 @@ $server = $_SERVER;
 $route = new Route( $server);
 $result = $route->execute();
 $response = new Response( $result );
-//die($response = $response->toJson());
-//
-//select SUM(rv.rating) as total,rv.raccoon_id,r.name from tbl_raccoon r, review rv where r.id = rv.raccoon_id GROUP BY rv.raccoon_id 
-//
-
-
+$response->toJson();

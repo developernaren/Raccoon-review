@@ -12,7 +12,7 @@ class Response
     }
 
     function toJson() {
-         return json_encode($this->data);
+         die( json_encode($this->data) );
     }
 
     function array_to_xml($array, &$xml_user_info) {

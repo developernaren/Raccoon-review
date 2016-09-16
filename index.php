@@ -1,11 +1,7 @@
 <?php
-
-include ("includes/header.php");
-include ("api/index.php");
-
-$response = new Response( $result);
-
-
+    require_once "api/classes/Db.php";
+    require_once "api/classes/Racoon.php";
+    include ("includes/header.php");
 ?>
 <section class="main-item">
 
@@ -55,20 +51,21 @@ $response = new Response( $result);
         </div>
         <?php
 
-        $result = json_decode($response->toJson(),true);
-        foreach ($result as  $raccoons)
+       $raccoons = new Racoon();
+        $result = $raccoons->getAllRaccoons();
+        foreach ($result as  $raccoon)
         {
 
         ?>
         <div class="rac-list">
 
-            <img src="<?php echo $raccoons['imageUrl']; ?>" alt="Procyan Lator">
-            <p>Name : <strong><?php echo $raccoons['name']; ?>  </strong></p>
+            <img src="<?php echo $raccoon->getImageUrl(); ?>" alt="Procyan Lator">
+            <p>Name : <strong><?php echo $raccoon->getName(); ?>  </strong></p>
             <p>Review : <strong>45</strong></p>
             <br>
             <br>
             <br>
-            <a id="#hrefs" value="<?php echo $raccoons['id']; ?>" onclick="detail(<?php echo $raccoons['id']; ?>)">Detail about Raccon</a>
+            <a id="#hrefs" value="<?php echo $raccoon->getId(); ?>" onclick="detail(<?php echo $raccoon->getId(); ?>)">Detail about Raccon</a>
         </div>
         <?php } ?>
         
@@ -205,9 +202,10 @@ $response = new Response( $result);
     function detail(obj)
     {
        
-        var url = "http://localhost/Raccoon-review/api/raccoon/"+obj;
+        var url = baseUrl + "api/raccoon/"+obj;
             $.get(url,function(data,status){
-                alert(data);
+                data = JSON.parse( data );
+                console.log( data );
             });
 
     }

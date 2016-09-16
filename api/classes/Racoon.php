@@ -127,10 +127,14 @@ class Racoon extends Db
     function getOne( $id ) {
 
         $result = $this->getById( $id );
-        $row = $result->fetch_assoc();
-        $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
-        $raccoon->getReviews();
-        $raccoon->getTotal();
+        $raccoon = new self();
+        if( $result->num_rows > 0 ) {
+            $row = $result->fetch_assoc();
+            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $raccoon->getReviews();
+            $raccoon->getTotal();
+        }
+
         return json_encode( $raccoon );
 
     }
@@ -144,15 +148,19 @@ class Racoon extends Db
 
         $result = $this->getRelated('review', 'raccoon_id', $this->getId() );
         $reviewsArr = [];
-        while ( $row = $result->fetch_assoc() ) {
-            $review = new Review();
-            $review->setKey( $row['viewer_key']);
-            $review->setId( $row['id']);
-            $review->setName("Narendra");
-            $review->setReviewText("this is aweoine");
-            $review->setRacoonId('1');
-            $reviewsArr[] = $review;
+        if( $result->num_rows > 0 ) {
+            while ( $row = $result->fetch_assoc() ) {
+                $review = new Review();
+                $review->setKey( $row['viewer_key']);
+                $review->setId( $row['id']);
+                $review->setName($row['reviewer_name']);
+                $review->setReviewText( $row['review']);
+                $review->setRacoonId( $row['raccoon_id']);
+                $review->setRating( $row['rating']);
+                $reviewsArr[] = $review;
+            }
         }
+
         $this->setReviews( $reviewsArr );
         return $reviewsArr;
     }
