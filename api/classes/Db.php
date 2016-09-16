@@ -54,7 +54,7 @@ class Db
     function totalResult()
     {
         $db = $this->getDB();
-        $total = $db->query('select count(id) as cnt from review');
+        $total = $db->query('select count(id) as cnt from tbl_raccoon');
         $db->close();
         return $total;
 
@@ -85,6 +85,30 @@ class Db
         return $total;
     }
 
+    function getRate() 
+    {
+        $db = $this->getDB();
+        $total = $db->query('select * from '.$this->table.' order by name desc');
+        $db->close();
+        return $total;
+    }
+    
+    function getByRateHigh()
+    {
+        $db = $this->getDB();
+        $result = $db->query('select sum( rating ) as totalRating,b.* from review as a join tbl_raccoon as b on a.raccoon_id = b.id group by raccoon_id order by totalRating desc');
+        $db->close();
+        return $result;   
+    }
+
+    function getByRateLow()
+    {
+        $db = $this->getDB();
+        $result = $db->query('select sum( rating ) as totalRating,b.* from review as a join tbl_raccoon as b on a.raccoon_id = b.id group by raccoon_id order by totalRating asc');
+        $db->close();
+        return $result;
+    }
+
     function total_review($id)
     {
         $db = $this->getDB();
@@ -102,6 +126,8 @@ class Db
         $db->close();
         return $result;
     }
+
+    
 
 
 }

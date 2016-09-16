@@ -29,6 +29,7 @@
 	</div>
 
     <!-- Main Raccoons contents with sorting  -->
+<div id="status"></div>
 
     <div class="rac-container">
         <div class="rac-info">
@@ -49,15 +50,24 @@
                    </select>
               </span>
         </div>
+        
+        <div id="new-list">
+        
+            
+        </div>
+        
+        <div class="php-loop">
         <?php
 
-       $raccoons = new Racoon();
+        $raccoons = new Racoon();
         $result = $raccoons->getAllRaccoons();
+
         foreach ($result as  $raccoon)
         {
 
         ?>
-        <div class="rac-list">
+
+        <div class="rac-list" id="first-rac">
 
             <img src="<?php echo $raccoon->getImageUrl(); ?>" alt="Procyan Lator">
             <p>Name : <strong><?php echo $raccoon->getName(); ?>  </strong></p>
@@ -68,8 +78,11 @@
             <a id="#hrefs" value="<?php echo $raccoon->getId(); ?>" onclick="detail(<?php echo $raccoon->getId(); ?>)">Detail about Raccon</a>
         </div>
         <?php } ?>
+
+        </div>
         
-        <div class="rac-pagination">
+        
+       <!--  <div class="rac-pagination">
                 <ul>
                     <span>Showing Per Page <strong>: 10</strong> </span>
                     <span><strong>Pages : </strong></span>
@@ -79,80 +92,38 @@
                     <li><a href="">4</a></li>
                     <li><a href="">5</a></li>
                 </ul>
-        </div>
+        </div> -->
         
 
     </div>
 
 </section>
 
-<div id="status"></div>
+
+
+
 
 <div class="detail-container">
-   <div class="sum-list">
-        <p><strong>Detail</strong> of Raccoon Name</p>
-   </div>
+   
+     <div class="sum-list">
+     </div>   
+  
    <section class="rac-detail">
-            <img src="assets/images/Curious_Raccoon.jpg" alt="">
+            <img id="racoon-img" src="" alt="">
 
-        <div class="about-rac">
-           <p><big><strong>Description </strong></big> </p>
-            <p>Name              <strong> = Hello</strong> </p>
-            <p>Total Review      <strong> = 45</strong> </p>
-            <p>Average Rating    <strong> = 4</strong> </p>
+        <div class="about-racs">
+           
         </div>
 
     </section>
     <section class="user-review">
         <div class="user-comments">
-            <p>User Reviews</p>
+            
         </div>
-        <div class="user-rac-rate" id="1">
-            <p>Username = <strong>Rabin Bhandari</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>4</strong>
-            <select  onchange="changeOption(this)">
-                <option value="null">Select Option</option>
-                <option value="update">Update</option>
-                <option value="delete">Delete</option>
-            </select>
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique aperiam quisquam quibusdam commodi dicta tempore, fugiat. Nobis possimus unde id, fuga, mollitia officiis! Neque labore eum, libero adipisci eligendi vel nostrum iusto in, minima quas ipsa necessitatibus odio, natus deleniti aliquid assumenda facere aut, sequi dolor tempora omnis illum. Rerum eaque, odio!</p>
-        </div>
+        <div id="review-wrapper-div"></div>
 
-        <div class="user-rac-rate" id="2">
-            <p>Username = <strong>Rabinss Bhandari</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>4</strong>
-            <select  onchange="changeOption(this)">
-                <option value="null">Select Option</option>
-                <option value="update">Update</option>
-                <option value="delete">Delete</option>
-            </select>
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique aperiam quisquam quibusdam commodi dicta tempore, fugiat. Nobis possimus unde id, fuga, mollitia officiis! Neque labore eum, libero adipisci eligendi vel nostrum iusto in, minima quas ipsa necessitatibus odio, natus deleniti aliquid assumenda facere aut, sequi dolor tempora omnis illum. Rerum eaque, odio!</p>
-        </div>
 
-        <div class="user-rac-rate" id="3">
-            <p>Username = <strong>RabinGaurab Bhandari</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>4</strong>
-            <select  onchange="changeOption(this)">
-                <option value="null">Select Option</option>
-                <option value="update">Update</option>
-                <option value="delete">Delete</option>
-            </select>
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique aperiam quisquam quibusdam commodi dicta tempore, fugiat. Nobis possimus unde id, fuga, mollitia officiis! Neque labore eum, libero adipisci eligendi vel nostrum iusto in, minima quas ipsa necessitatibus odio, natus deleniti aliquid assumenda facere aut, sequi dolor tempora omnis illum. Rerum eaque, odio!</p>
-        </div>
-        <div class="user-rac-rate" id="4">
-            <p>Username = <strong>Rabin Bhandari</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>4</strong>
-            <select  onchange="changeOption(this)">
-                <option value="null">Select Option</option>
-                <option value="update">Update</option>
-                <option value="delete">Delete</option>
-            </select>
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique aperiam quisquam quibusdam commodi dicta tempore, fugiat. Nobis possimus unde id, fuga, mollitia officiis! Neque labore eum, libero adipisci eligendi vel nostrum iusto in, minima quas ipsa necessitatibus odio, natus deleniti aliquid assumenda facere aut, sequi dolor tempora omnis illum. Rerum eaque, odio!</p>
-        </div>
+
          <div class="user-rac-rate" id="update-rac">
             <form action="api/api/">
                 <p>Username = <input type="text" value="rabin"> &nbsp;&nbsp;&nbsp;&nbsp;Rating  <input type="number" min="1" max="5" value="4" >
@@ -160,52 +131,242 @@
                 <input type="button" onclick="hideUpdate()" value="Cancel">
                 </p>
                 <p> <textarea name="" id="" cols="30" rows="10"></textarea> </p>
-                <input name="method" type="hidden" value="put" >
             </form>
         </div>
 
     </section>
     <div class="new-review-button" id="mg-section">
-        <button onclick="newSection()" id="bt-comment" >Click here to add your new Review</button>
+
+
+        <div class="button">
+        
+        </div>
         <div class="user-comment" id="user-comment">
-            <form action="api/api" method="post">
+            
                 <input type="text" name="username" id="username" placeholder="Your name" required>
                 <span>Your Rating &nbsp;&nbsp;&nbsp; </span>
                 
                 <span class="radio-toolbar">
-                    <input type="radio" id="rate1" name="rate" value="1">
-                    <label for="rate1">1</label>
-                    <input type="radio" id="rate2" name="rate" value="2">
-                    <label for="rate2">2</label>
-                    <input type="radio" id="rate3" name="rate" value="3">
-                    <label for="rate3">3</label>
-                    <input type="radio" id="rate4" name="rate" value="4">
-                    <label for="rate4">4</label>
-                    <input type="radio" id="rate5" name="rate" value="5">
-                    <label for="rate5">5</label>
+                    <select id="rate-value">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                 </span>
 
                 <p>
-                <textarea name="" id="" cols="30" rows="10">Hello</textarea>
+                <textarea id="review-text" cols="30" rows="10"></textarea>
                 </p>
                 <div class="button-area" id="comment-box-show">
-                    <input type="submit"  value="Post">
+                    <input type="submit" onclick="ajax_posts()" value="Post">
                     <input type="button" onclick="hideBox()" id="cancel" value="Cancel">
                 </div>
 
-            </form>
         </div>
     </div>
 </div>
 <script>
+
+    $(".rac-container .rac-info #nameSort #asc").click(function () {
+
+                $(".php-loop").hide();
+                var url = baseUrl + "api/raccoon/sortByAsc";
+                $.get(url,function(data,status)
+                {
+                    var data = JSON.parse( data );
+                    var asc = '';
+
+                    $.each( data, function(key,datas) {
+                        asc += '<div id="new-rac-list" class="rac-list">';
+                        asc += '<img src="'+ datas.imageUrl +'" alt="'+ datas.name +'" >';
+                        asc += '<p>Name : <strong>'+ datas.name +'</strong></p>';
+                        asc += '<p>Review : <strong>45</strong></p>';
+                        asc += '<br><br><br>';
+                        asc += '<a id="#hrefs" value="'+ datas.id +'" onclick="detail('+ datas.id +')">Detail about Raccon</a>'; 
+                        asc += '</div>';
+
+                        
+
+                })
+
+                    $("#new-list").html( asc );
+
+                });
+
+    });
+
+    // Descending 
+    
+    $(".rac-container .rac-info #nameSort #desc").click(function () {
+
+                $(".php-loop").hide();
+                var url = baseUrl + "api/raccoon/getBySortByDesc";
+                $.get(url,function(data,status)
+                {
+                    var data = JSON.parse( data );
+                    var asc = '';
+
+                    $.each( data, function(key,datas) {
+                        asc += '<div id="new-rac-list" class="rac-list">';
+                        asc += '<img src="'+ datas.imageUrl +'" alt="'+ datas.name +'">';
+                        asc += '<p>Name : <strong>'+ datas.name +'</strong></p>';
+                        asc += '<p>Review : <strong>45</strong></p>';
+                        asc += '<br><br><br>';
+                        asc += '<a id="#hrefs" value="'+ datas.id +'" onclick="detail('+ datas.id +')">Detail about Raccon</a>'; 
+                        asc += '</div>';
+                })
+
+                   $("#new-list").html( asc );
+
+                });
+
+    });
+
+
+    // Highest Rating
+    
+    $(".rac-container .rac-info #ratingSort #highest").click(function () {
+
+                $(".php-loop").hide();
+                var url = baseUrl + "api/raccoon/getByRateHigh";
+                $.get(url,function(data,status)
+                {
+                    var data = JSON.parse( data );
+                    var asc = '';
+
+                    $.each( data, function(key,datas) {
+                        asc += '<div id="new-rac-list" class="rac-list">';
+                        asc += '<img src="'+ datas.imageUrl +'" alt="'+ datas.name +'" >';
+                        asc += '<p>Name : <strong>'+ datas.name +'</strong></p>';
+                        asc += '<p>Review : <strong>45</strong></p>';
+                        asc += '<br><br><br>';
+                        asc += '<a id="#hrefs" value="'+ datas.id +'" onclick="detail('+ datas.id +')">Detail about Raccon</a>'; 
+                        asc += '</div>';
+
+                        
+
+                })
+
+                    $("#new-list").html( asc );
+
+                });
+
+    });
+
+
+    // Lowest
+    
+    $(".rac-container .rac-info #ratingSort #lowest").click(function () {
+
+                $(".php-loop").hide();
+                var url = baseUrl + "api/raccoon/getByRateLow";
+                $.get(url,function(data,status)
+                {
+                    var data = JSON.parse( data );
+                    var asc = '';
+
+                    $.each( data, function(key,datas) {
+                        asc += '<div id="new-rac-list" class="rac-list">';
+                        asc += '<img src="'+ datas.imageUrl +'" alt="'+ datas.name +'" >';
+                        asc += '<p>Name : <strong>'+ datas.name +'</strong></p>';
+                        asc += '<p>Review : <strong>45</strong></p>';
+                        asc += '<br><br><br>';
+                        asc += '<a id="#hrefs" value="'+ datas.id +'" onclick="detail('+ datas.id +')">Detail about Raccon</a>'; 
+                        asc += '</div>';
+                })
+
+                    $("#new-list").html( asc );
+
+                });
+
+    });
+
+    // Insert commetst
+    
+    function ajax_posts() {
+        var hr = new XMLHttpRequest();
+        var url = "test.php";
+        var username = document.getElementById("username").value;
+        var cmt = document.getElementById("review-text").value;
+        var rate = document.getElementById("rate-value").value;
+
+        var vars = "username=" + username + "&comments=" + cmt + "&rate="+rate;
+        hr.open("POST", url, true);
+
+        hr.setRequestHeader("Content-Type", "application/json");
+
+        hr.onreadystatechange = function () {
+            if (hr.readyState == 4 && hr.status == 200) {
+                var return_data = hr.responseText;
+                document.getElementById("status").innerHTML = return_data;
+            }
+        }
+
+        hr.send(vars);
+        document.getElementById("status").innerHTML = "Processing......";
+
+    }
 
     function detail(obj)
     {
        
         var url = baseUrl + "api/raccoon/"+obj;
             $.get(url,function(data,status){
+                var data = JSON.parse( data );
                 data = JSON.parse( data );
-                console.log( data );
+               
+
+               // Rating 
+               // (252*5 + 124*4 + 40*3 + 29*2 + 33*1) / (252 + 124 + 40 + 29 + 33)
+               // 
+               
+               $("#racoon-img").attr( 'src', data.imageUrl );
+
+                // description
+                var description = '';
+                description +='<p><big><strong>Description </strong></big> </p>';
+                description +='<p>Name              <strong> = '+ data.name +'</strong> </p>';
+                description +='<p>Total Review      <strong> = 45</strong> </p>';
+                description += '<p>Average Rating    <strong> = 4</strong> </p>';
+                $(".about-racs").html( description );
+
+                // User comments 
+                
+                var comments = '<p>User Reviews</p>';
+                $(".user-comments").html( comments );
+
+
+                // Description
+                var detail = '<p><strong>Detail</strong> of '+ data.name +'</p>';
+                $(".sum-list").html( detail );
+
+                // Button
+                var button = '<button onclick="newSection()" id="bt-comment" >Click here to add your new Review</button>';
+                $(".button").html( button );
+
+                var html = '';
+                $.each( data.reviews, function( key, review ) {
+
+                    
+                    html += '<div class="user-rac-rate" id="2">';
+                    html += '<p>Username = <strong>' + review.name + '</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>'+ review.rating +'</strong>';
+                    html += '<select  onchange="changeOption(this)">';
+                    html += '<option value="null">Select</option>';
+                    html += '<option value="update">Update</option>';
+                    html += '<option value="delete">Delete</option>';
+                    html += '</select>';
+                    html += '</p><p>';
+                    html += review.reviewText;
+                    html += '</p></div>';
+
+
+                })
+                
+
+
+                $("#review-wrapper-div").html( html );
             });
 
     }
@@ -251,8 +412,7 @@
         switch (option) {
             case "update":
                 document.getElementById("bt-comment").style.display = "none";
-                document.getElementById("user-comment").style.display = "none";
-                document.getElementById("3").style.display = "none";
+                document.getElementById("user-comment").style.display = "none";    
                 document.getElementById("update-rac").style.display = "block";
 
                 break;
@@ -260,11 +420,19 @@
                     var txt;
                     var r = confirm("Are u sure want to delete this review ?");
                     if (r == true) {
-                        txt = "You pressed OK!";
+                        
+                        document.getElementById("update-rac").style.display = "none";
+                        
+                        // Prompt Box
+                        var key = prompt("Please enter your Secret Key[ **** ]");
+                        if( key != null) {
+                            alert("Your key is "+key);
+                        }
+
                     } else {
-                        txt = "You pressed Cancel!";
+                        txt = "Comments not deleted !";
+                        alert( txt );
                         document.getElementById("bt-comment").style.display = "block";
-                        document.getElementById("3").style.display = "block";
                         document.getElementById("update-rac").style.display = "none";
                  break;
                     }
@@ -284,7 +452,6 @@
     function hideUpdate()
     {
         document.getElementById("bt-comment").style.display = "block";
-        document.getElementById("3").style.display = "block";
         document.getElementById("update-rac").style.display = "none";
     }
 </script>

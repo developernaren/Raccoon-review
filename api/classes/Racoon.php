@@ -24,6 +24,10 @@ class Racoon extends Db
         $this->setImageUrl( $imageUrl );
     }
 
+    public function getTotalRe()
+    {
+        return $this->total;
+    }
     /**
      * @return mixed
      */
@@ -90,6 +94,10 @@ class Racoon extends Db
 
     }
 
+    // Raccoon Rating
+    // select sum( rating ) as totalRating,b.* from review as a join tbl_raccoon as b on a.raccoon_id = b.id group by raccoon_id order by totalRating desc 
+
+
     function sortByAsc()
     {
         $result = $this->getBySortAsc();
@@ -104,6 +112,26 @@ class Racoon extends Db
     function sortByDesc()
     {
         $result = $this->getBySortDesc();
+        while($row = $result->fetch_assoc()) {
+            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $resultArr[] = $raccoon;
+        }
+        return $resultArr;
+    }
+
+    function getByRateHighs()
+    {
+        $result = $this->getByRateHigh();
+        while($row = $result->fetch_assoc()) {
+            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $resultArr[] = $raccoon;
+        }
+        return $resultArr;
+    }
+
+    function getByRateLows()
+    {
+        $result = $this->getByRateLow();
         while($row = $result->fetch_assoc()) {
             $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
             $resultArr[] = $raccoon;

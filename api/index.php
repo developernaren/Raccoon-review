@@ -13,7 +13,10 @@ Route::get('review', 'Review@getAllReviews');
 Route::get('raccoon/{num}', 'Racoon@getOne');
 Route::get('raccoon/sortByAsc','Racoon@sortByAsc');
 Route::get('raccoon/getBySortByDesc','Racoon@sortByDesc');
+Route::get('raccoon/getRating','Racoon@getRatings');
 
+Route::get('raccoon/getByRateHigh','Racoon@getByRateHighs');
+Route::get('raccoon/getByRateLow','Racoon@getByRateLows');
 
 
 $server = $_SERVER;

@@ -49,9 +49,9 @@ header .header-menu ul li a:hover
     cursor: pointer;
 }
 
-section .about-rac 
+section .about-rac p
 {
-    padding: 2px 0px;
+    line-height: 25px;
 }
 section .about-rac .about-rac-para 
 {
@@ -82,6 +82,24 @@ section .about-rac .about-rac-para p:first-letter
     font-size: 28px;
     padding-right: 3px;
 }
+
+
+
+section .about-racs p
+{
+    color: #fff;
+    display: inline-block;
+    margin: 0;
+    line-height: 25px;
+    padding: 6px 5px;
+}
+section .about-racs
+{
+    background-color: darkcyan;
+    margin-left: 50px;
+    width: 90%;
+}
+
 section .about-rac .about-rac-image 
 {
     text-align: center;
@@ -178,6 +196,9 @@ section .rac-container .rac-list img
     border-radius: 2px;
     -webkit-border-radius: 2px;
 }
+
+
+
 section .rac-container .rac-pagination
 {    
     color: #fff;
@@ -389,14 +410,14 @@ osition: relative;*/
 }
 .detail-container .new-review-button .user-comment
 {
-    display: none;
+ display: none;
     border: 2px solid darkgray;
     width: 93%;
     padding: 20px;
     box-sizing: border-box;
     text-align: left;
 }
-.detail-container .new-review-button .user-comment form input[type="text"]
+.detail-container .new-review-button .user-comment input[type="text"]
 {
     height:25px;
     width: 500px;
@@ -407,31 +428,25 @@ osition: relative;*/
     font-size: 13px;
     box-sizing: border-box;
 }
-.detail-container .new-review-button .user-comment form span
+.detail-container .new-review-button .user-comment span
 {
     font-family: Roboto slab;
     font-size: 13px;
 }
-.detail-container .new-review-button .user-comment form .radio-toolbar input[type="radio"] {
-    display:none;
-}
 
-.detail-container .new-review-button .user-comment form .radio-toolbar label {
-    display:inline-block;
-    border: 2px solid darkcyan;
-    padding:4px 9px;
+
+.detail-container .new-review-button .user-comment .radio-toolbar select {
+
+    padding:4px 5px;
     font-family:Arial;
-    font-size:14px;
+    font-size:13px;
+    border-radius: 2px;
     cursor: pointer;
-    border-radius: 50%;
 }
 
-.detail-container .new-review-button .user-comment form .radio-toolbar input[type="radio"]:checked + label {
-    background-color:darkcyan;
-    color: #fff;
-}
 
-.detail-container .new-review-button .user-comment form textarea
+
+.detail-container .new-review-button .user-comment textarea
 {
     border: 1px solid gray;
     border-radius: 3px;
@@ -444,11 +459,11 @@ osition: relative;*/
     min-width: 85%;
     max-width: 98.5%;    
 }
-.detail-container .new-review-button .user-comment form .button-area
+.detail-container .new-review-button .user-comment .button-area
 {
     
 }
-.detail-container .new-review-button .user-comment form input[type="submit"],input[type="button"]
+.detail-container .new-review-button .user-comment input[type="submit"],input[type="button"]
 {
     padding: 4px 25px;
     font-family: sans-serif;
@@ -458,7 +473,7 @@ osition: relative;*/
     font-size: 12px;   
 }
 
-.detail-container .new-review-button .user-comment form input[type="submit"]:hover,input[type="button"]:hover
+.detail-container .new-review-button .user-comment input[type="submit"]:hover,input[type="button"]:hover
 {
     background-color: darkcyan;
     color: #fff;

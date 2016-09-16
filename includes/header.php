@@ -19,7 +19,7 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
     </script>
     <script>
         $(document).ready(function () {
-            $(".header-menu a").click(function () {
+            $(document).on('click', '#reload-home', function() {
                 $("header").remove();
                 $(".main-item").remove();
                 contentType: "application/json; charset=utf-8",
@@ -27,47 +27,12 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
                     $.ajax({
                         url: baseUrl,
                         success: function (result) {
-
-
+                            
                             $(".main-item2").html(result);
                         }
                     });
             });
 
-            $(".rac-container .rac-info #nameSort #asc").click(function () {
-                $("header").remove();
-                $(".main-item").remove();
-                contentType: "application/json; charset=utf-8",
-
-                    $.ajax({
-                        url: baseUrl + "api/raccoon/sortByAsc",
-                        success: function (result) {
-
-                            $(".main-item2").html(result);
-                        }
-                    });
-            });
-
-            $(".rac-container .rac-info #nameSort #desc").click(function () {
-                $("header").remove();
-                $(".main-item").remove();
-                contentType: "application/json; charset=utf-8",
-
-                    $.ajax({
-                        url: baseUrl + "api/raccoon/getBySortByDesc", success: function (result) {
-
-                            $(".main-item2").html(result);
-                        }
-                    });
-            });
-
-            $(".rac-container .rac-info #ratingSort #highest").click(function () {
-                alert("In progress highest");
-            });
-
-            $(".rac-container .rac-info #ratingSort #lowest").click(function () {
-                alert("In process lowest");
-            });
         });
 
     </script>
@@ -81,7 +46,7 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
     <!-- Navbar Menu -->
     <div class="header-menu">
         <ul>
-            <li><a>HOME</a></li>
+            <li><a id="reload-home">HOME</a></li>
         </ul>
     </div>
 </header>
