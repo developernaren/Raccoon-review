@@ -244,9 +244,6 @@
                         asc += '<br><br><br>';
                         asc += '<a id="#hrefs" value="'+ datas.id +'" onclick="detail('+ datas.id +')">Detail about Raccon</a>'; 
                         asc += '</div>';
-
-                        
-
                 })
 
                     $("#new-list").html( asc );
@@ -352,7 +349,9 @@
                     
                     html += '<div class="user-rac-rate" id="2">';
                     html += '<p>Username = <strong>' + review.name + '</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>'+ review.rating +'</strong>';
-                    html += '<select  onchange="changeOption(this)">';
+                    html += '<select '
+                    html += 'data-id="' + review.id + '"';
+                    html += ' onchange="changeOption(this)">';
                     html += '<option value="null">Select</option>';
                     html += '<option value="update">Update</option>';
                     html += '<option value="delete">Delete</option>';
@@ -417,17 +416,26 @@
 
                 break;
             case "delete":
+                    var id = obj.getAttribute('data-id');
                     var txt;
                     var r = confirm("Are u sure want to delete this review ?");
                     if (r == true) {
                         
                         document.getElementById("update-rac").style.display = "none";
-                        
+
+                        $.ajax({
+                            url : baseUrl + "api/review/" + id,
+                            type : "delete",
+                            success : function( response ) {
+
+
+                            }
+                        });
                         // Prompt Box
-                        var key = prompt("Please enter your Secret Key[ **** ]");
-                        if( key != null) {
-                            alert("Your key is "+key);
-                        }
+//                        var key = prompt("Please enter your Secret Key[ **** ]");
+//                        if( key != null) {
+//                            alert("Your key is "+key);
+//                        }
 
                     } else {
                         txt = "Comments not deleted !";

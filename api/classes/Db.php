@@ -127,6 +127,14 @@ class Db
         return $result;
     }
 
+    function delete( $id ) {
+
+        $db = $this->getDB();
+        $result = $db->query('delete from ' . $this->table . ' where id=' . $id);
+        $db->close();
+        return $result;
+    }
+
     
 
 
