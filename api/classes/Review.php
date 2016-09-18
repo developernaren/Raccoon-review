@@ -144,8 +144,15 @@ class Review extends Db
 
     }
 
+    function updateReview( $id ) {
+
+        $putData = [];
+        $put = file_get_contents('php://input');
+        mb_parse_str( $put,  $putData);
+
+        $this->update( $id, $putData );
 
 
-
+    }
 
 }

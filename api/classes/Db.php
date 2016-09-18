@@ -34,9 +34,17 @@ class Db
     }
 
 
-    function update($table, $id, array  $data)
+    function update( $id, array  $data)
     {
+        $query = "update " . $this->table ." set ";
+        $queryArr = [];
+        foreach ( $data as $key => $d ) {
+            $queryArr[] = $key . "='" . $d ."'";
+        }
 
+        $query .= implode(',', $queryArr );
+
+        die( $query );
 
     }
 

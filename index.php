@@ -413,6 +413,18 @@
                 document.getElementById("bt-comment").style.display = "none";
                 document.getElementById("user-comment").style.display = "none";    
                 document.getElementById("update-rac").style.display = "block";
+                var review = document.getElementById("review-input").value;
+                console.log( review );
+                $.ajax({
+                    url : baseUrl + "api/review/" + id,
+                    type : "put",
+                    data : {
+                        review : review
+                    },
+                    success : function( response ) {
+
+                    }
+                });
 
                 break;
             case "delete":
@@ -422,7 +434,6 @@
                     if (r == true) {
                         
                         document.getElementById("update-rac").style.display = "none";
-
                         $.ajax({
                             url : baseUrl + "api/review/" + id,
                             type : "delete",
@@ -431,11 +442,6 @@
 
                             }
                         });
-                        // Prompt Box
-//                        var key = prompt("Please enter your Secret Key[ **** ]");
-//                        if( key != null) {
-//                            alert("Your key is "+key);
-//                        }
 
                     } else {
                         txt = "Comments not deleted !";
