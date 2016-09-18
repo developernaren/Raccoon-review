@@ -18,6 +18,11 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
         var baseUrl = "<?php echo $baseUrl ?>";
     </script>
     <script>
+
+        function TimedRefresh( t ) {
+            setTimeout("location.reload(true);", t);
+        }
+
         $(document).ready(function () {
             $(document).on('click', '#reload-home', function() {
                 $("header").remove();
@@ -35,10 +40,11 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
 
         });
 
+
     </script>
 </head>
 
-<body>
+<body onload="JavaScript:TimedRefresh(30000)">
 
 <header>
     <!-- Nav Logo -->
