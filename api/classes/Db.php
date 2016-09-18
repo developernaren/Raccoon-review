@@ -34,9 +34,17 @@ class Db
     }
 
 
-    function update($table, $id, array  $data)
+    function update( $id, array  $data)
     {
+        $query = "update " . $this->table ." set ";
+        $queryArr = [];
+        foreach ( $data as $key => $d ) {
+            $queryArr[] = $key . "='" . $d ."'";
+        }
 
+        $query .= implode(',', $queryArr );
+
+        die( $query );
 
     }
 
@@ -123,6 +131,14 @@ class Db
 
         $db = $this->getDB();
         $result = $db->query('select * from ' . $table . ' where ' . $column . '= ' . $id);
+        $db->close();
+        return $result;
+    }
+
+    function delete( $id ) {
+
+        $db = $this->getDB();
+        $result = $db->query('delete from ' . $this->table . ' where id=' . $id);
         $db->close();
         return $result;
     }

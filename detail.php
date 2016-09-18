@@ -135,7 +135,8 @@ $result = json_decode($response,true);
     }
     function changeOption(obj)
     {
-        var option = obj.value;
+        var option = obj.value,
+            id = obj.getAttribute('data-id');
         switch (option) {
             case "update":
                 document.getElementById("bt-comment").style.display = "none";

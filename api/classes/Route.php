@@ -17,12 +17,28 @@ class Route {
         $this->server = $server;
     }
 
+    public static function put( $url, $classMethodStr ) {
+        if ( !isset( self::$routes['put'] ) ) {
+            self::$routes['put'] = [];
+        }
+        self::$routes['put'][ $url ] = $classMethodStr;
+    }
+
+    public static function delete( $url, $classMethodStr ) {
+        if ( !isset( self::$routes['delete'] ) ) {
+            self::$routes['delete'] = [];
+        }
+        self::$routes['delete'][ $url ] = $classMethodStr;
+    }
+
     public static function get( $url, $classMethodStr ) {
         if ( !isset( self::$routes['get'] ) ) {
             self::$routes['get'] = [];
         }
         self::$routes['get'][ $url ] = $classMethodStr;
     }
+
+
     public static function post( $url, $classMethodStr ) {
         if ( !isset( self::$routes['post'] ) ) {
             self::$routes['post'] = [];

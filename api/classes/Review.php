@@ -138,8 +138,21 @@ class Review extends Db
         return json_encode( $reviewsArr );
     }
 
+    function delete ( $id ) {
+
+        return parent::delete( $id );
+
+    }
+
+    function updateReview( $id ) {
+
+        $putData = [];
+        $put = file_get_contents('php://input');
+        mb_parse_str( $put,  $putData);
+
+        $this->update( $id, $putData );
 
 
-
+    }
 
 }

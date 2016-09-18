@@ -14,7 +14,8 @@ Route::get('raccoon/{num}', 'Racoon@getOne');
 Route::get('raccoon/sortByAsc','Racoon@sortByAsc');
 Route::get('raccoon/getBySortByDesc','Racoon@sortByDesc');
 Route::get('raccoon/getRating','Racoon@getRatings');
-
+Route::delete('review/{num}', 'Review@delete');
+Route::put('review/{num}', 'Review@updateReview');
 Route::get('raccoon/getByRateHigh','Racoon@getByRateHighs');
 Route::get('raccoon/getByRateLow','Racoon@getByRateLows');
 
