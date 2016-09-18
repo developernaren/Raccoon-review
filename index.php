@@ -33,7 +33,7 @@
 
     <div class="rac-container">
         <div class="rac-info">
-            <span>Total result <strong>: 45</strong> </span>
+            <span>Total result <strong>: 45 <!-- sir total review  --></strong> </span>
                 <span>
                    Sort By :
                    <select id="sort_option" onchange="myOptions()">
@@ -80,28 +80,10 @@
         <?php } ?>
 
         </div>
-        
-        
-       <!--  <div class="rac-pagination">
-                <ul>
-                    <span>Showing Per Page <strong>: 10</strong> </span>
-                    <span><strong>Pages : </strong></span>
-                    <li><a href="">1</a></li>
-                    <li><a href="">2</a></li>
-                    <li><a href="">3</a></li>
-                    <li><a href="">4</a></li>
-                    <li><a href="">5</a></li>
-                </ul>
-        </div> -->
-        
 
     </div>
 
 </section>
-
-
-
-
 
 <div class="detail-container">
    
@@ -122,16 +104,8 @@
         </div>
         <div id="review-wrapper-div"></div>
 
-
-
          <div class="user-rac-rate" id="update-rac">
-            <form action="api/api/">
-                <p>Username = <input type="text" value="rabin"> &nbsp;&nbsp;&nbsp;&nbsp;Rating  <input type="number" min="1" max="5" value="4" >
-                <input type="submit" value="update" >
-                <input type="button" onclick="hideUpdate()" value="Cancel">
-                </p>
-                <p> <textarea name="" id="" cols="30" rows="10"></textarea> </p>
-            </form>
+                 
         </div>
 
     </section>
@@ -155,6 +129,8 @@
                         <option value="5">5</option>
                     </select>
                 </span>
+                &nbsp; &nbsp; &nbsp; &nbsp; 
+                <span>Your key &nbsp; &nbsp; <input type="number" id="user-number" placeholder="your secrete key "> &nbsp; &nbsp; &nbsp; <big style="color:red;">*</big> length of key is 4</span>
 
                 <p>
                 <textarea id="review-text" cols="30" rows="10"></textarea>
@@ -283,26 +259,32 @@
     // Insert commetst
     
     function ajax_posts() {
-        var hr = new XMLHttpRequest();
-        var url = "test.php";
+
         var username = document.getElementById("username").value;
         var cmt = document.getElementById("review-text").value;
         var rate = document.getElementById("rate-value").value;
-
-        var vars = "username=" + username + "&comments=" + cmt + "&rate="+rate;
-        hr.open("POST", url, true);
-
-        hr.setRequestHeader("Content-Type", "application/json");
-
-        hr.onreadystatechange = function () {
-            if (hr.readyState == 4 && hr.status == 200) {
-                var return_data = hr.responseText;
-                document.getElementById("status").innerHTML = return_data;
-            }
+        var key_length = document.getElementById("user-number").value.length;
+        if( key_length != 4) {
+            alert( "length must be 4 numbers " );
+            return false;
         }
 
-        hr.send(vars);
-        document.getElementById("status").innerHTML = "Processing......";
+        var s_user_key  = document.getElementById("user-number").value;
+
+        $.ajax({
+                url : baseUrl + "api/review/" + update_userkey,
+                type : "put",
+                data : {
+                    username : username,
+                    cmt : cmt,
+                    rate : rate,
+                    s_user_key : user_key
+                },
+                success : function( response ) {
+                    // sir yo section ko data nai gaeraako xaena
+                }
+            });
+
 
     }
 
@@ -325,7 +307,7 @@
                 var description = '';
                 description +='<p><big><strong>Description </strong></big> </p>';
                 description +='<p>Name              <strong> = '+ data.name +'</strong> </p>';
-                description +='<p>Total Review      <strong> = 45</strong> </p>';
+                description +='<p>Total Review      <strong> = { sir yeha tyo raccon ko total review user ko coutn raakhne ho }</strong> </p>';
                 description += '<p>Average Rating    <strong> = 4</strong> </p>';
                 $(".about-racs").html( description );
 
@@ -351,7 +333,7 @@
                     html += '<p>Username = <strong>' + review.name + '</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>'+ review.rating +'</strong>';
                     html += '<select '
                     html += 'data-id="' + review.id + '"';
-                    html += ' onchange="changeOption(this)">';
+                    html += ' onchange="changeOption(this,'+review.id+')">';
                     html += '<option value="null">Select</option>';
                     html += '<option value="update">Update</option>';
                     html += '<option value="delete">Delete</option>';
@@ -405,28 +387,31 @@
         document.getElementById("bt-comment").style.display = "block";
 
     }
-    function changeOption(obj)
+    function changeOption(obj,id)
     {
         var option = obj.value;
+
         switch (option) {
+
             case "update":
+
+
                 document.getElementById("bt-comment").style.display = "none";
-                document.getElementById("user-comment").style.display = "none";    
+                document.getElementById("user-comment").style.display = "none";
+
+                var update = ' ';
+                update += '<p>Username = <input type="text" id="update-username" value="">';
+                update += '&nbsp;&nbsp;&nbsp;&nbsp;Rating';
+                update += '<input type="number" min="1" max="5" id="update-rate" value="3" >';
+                update += '&nbsp; &nbsp;<input type="number" id="update-key" placeholder="your key"  style="width:105px;">';
+                update += '<input type="submit" onclick="final_update()" value="update" >';
+                update += '<input type="button" onclick="hideUpdate()" value="Cancel"></p>';
+                update += '<p><textarea  id="update-text" cols="30" rows="10"></textarea> </p>';
+
                 document.getElementById("update-rac").style.display = "block";
-                var review = document.getElementById("review-input").value;
-                console.log( review );
-                $.ajax({
-                    url : baseUrl + "api/review/" + id,
-                    type : "put",
-                    data : {
-                        review : review
-                    },
-                    success : function( response ) {
-
-                    }
-                });
-
+                $("#update-rac").html(update);
                 break;
+
             case "delete":
                     var id = obj.getAttribute('data-id');
                     var txt;
@@ -434,14 +419,24 @@
                     if (r == true) {
                         
                         document.getElementById("update-rac").style.display = "none";
-                        $.ajax({
-                            url : baseUrl + "api/review/" + id,
-                            type : "delete",
-                            success : function( response ) {
+                        var user_key = prompt("Enter your key", "Your key");
+                        
+                        if( !isNaN(user_key) && !user_key == null ) {
+                                alert( user_key );
+                        } else {
+                            alert( "string or null number can't be accepted !" );
+                            return false;
+                        }
 
+                        // sir delete garna ko laagi user ko id aako xa ra secrete code enter garepaxi check garera delete hanne ho 
+                        // $.ajax({
+                        //     url : baseUrl + "api/review/" + id,
+                        //     type : "delete",
 
-                            }
-                        });
+                        //     success : function( response ) {
+                        //         alert("Hello");
+                        //     }
+                        // });
 
                     } else {
                         txt = "Comments not deleted !";
@@ -454,12 +449,35 @@
 
                 break;
             case "null" :
-                document.getElementById("3").style.display = "block";
                 document.getElementById("update-rac").style.display = "none";
+                document.getElementById("bt-comment").style.display = "block";      
                  break;
             default:
                 break;
         }
+
+    }
+
+    // Update function 
+    function final_update() {
+        var update_name = document.getElementById("update-username").value;
+        var update_rate = document.getElementById("update-rate").value;
+        var update_text = document.getElementById("update-text").value;
+        var update_userkey = document.getElementById("update-key").value;
+        
+        $.ajax({
+                url : baseUrl + "api/review/" + update_userkey,
+                type : "put",
+                data : {
+                    update_name : update_name,
+                    update_rate : update_rate,
+                    update_text : update_text
+                },
+                success : function( response ) {
+
+                    // sir update code garda user ko secrete key check garera garne ho 
+                }
+            });
 
     }
 
