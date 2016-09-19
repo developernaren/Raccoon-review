@@ -13,7 +13,7 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
     <meta name="author" content="Replace with ur name">
     <title>Raccoon Review</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="assets/js/jquery-1.12.4.min.js"></script>
     <script>
         var baseUrl = "<?php echo $baseUrl ?>";
     </script>

@@ -18,8 +18,6 @@ class Db
 
     function insert(array $data)
     {
-
-
         $queryString = "insert into "
             . $this->table
             . " ( "
@@ -34,17 +32,18 @@ class Db
     }
 
 
-    function update( $id, array  $data)
+    function update(array $data)
     {
+
         $query = "update " . $this->table ." set ";
-        $queryArr = [];
-        foreach ( $data as $key => $d ) {
-            $queryArr[] = $key . "='" . $d ."'";
-        }
 
-        $query .= implode(',', $queryArr );
+        $query .= "reviewer_name = ".$data['update_name'].", rating = ".$data['update_rate'].", review = ".$data['update_text'];
+        $query .= " where viewer_key = ".$data['update_userkey'];
 
-        die( $query );
+        $db = $this->getDB();
+        $result = $db->query( $query );
+        $db->close();
+        return $result;
 
     }
 
@@ -117,10 +116,10 @@ class Db
         return $result;
     }
 
-    function total_review($id)
+    function total_review( $id )
     {
         $db = $this->getDB();
-        $result = $db->query('select * from reviews where raccoon_id = ' . $id);
+        $result = $db->query('select count(*) as total_review from review where raccoon_id = '.$id);
         $db->close();
         return $result;
 
@@ -135,10 +134,13 @@ class Db
         return $result;
     }
 
-    function delete( $id ) {
+    function delete( $key ) {
 
         $db = $this->getDB();
-        $result = $db->query('delete from ' . $this->table . ' where id=' . $id);
+        $result = $db->query('delete from ' . $this->table . ' where viewer_key=' . $key);
+        if(!$result) {
+            return "Key doesn't match";
+        }
         $db->close();
         return $result;
     }

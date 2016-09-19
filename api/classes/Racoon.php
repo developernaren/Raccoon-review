@@ -87,7 +87,7 @@ class Racoon extends Db
         $result = $this->getAll();
         $resultArr = [];
         while( $row = $result->fetch_assoc() ) {
-            $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
+            $raccoon = new self( $row['id'],$row['name'], $row['image_url']);
             $resultArr[] = $raccoon;
         }
         return $resultArr;
@@ -147,9 +147,10 @@ class Racoon extends Db
         return $total;
 
     }
-    function getTotalReview($id){
-        $review = $this->total_review($id);
-        return $review;
+    function getTotalReview( $id ){
+        $review = $this->total_review( $id );
+        $result = $review->fetch_assoc();
+        return $result;
     }
 
     function getOne( $id ) {

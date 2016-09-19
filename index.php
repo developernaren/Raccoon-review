@@ -33,7 +33,15 @@
 
     <div class="rac-container">
         <div class="rac-info">
-            <span>Total result <strong>: 45 <!-- sir total review  --></strong> </span>
+            <span>Total result <strong>: <?php
+
+                $raccoons = new Racoon();
+
+                $total_result = $raccoons->getTotal();
+                $total = $raccoons->total;
+                echo $total;
+
+            ?></strong> </span>
                 <span>
                    Sort By :
                    <select id="sort_option" onchange="myOptions()">
@@ -59,7 +67,6 @@
         <div class="php-loop">
         <?php
 
-        $raccoons = new Racoon();
         $result = $raccoons->getAllRaccoons();
 
         foreach ($result as  $raccoon)
@@ -71,7 +78,12 @@
 
             <img src="<?php echo $raccoon->getImageUrl(); ?>" alt="Procyan Lator">
             <p>Name : <strong><?php echo $raccoon->getName(); ?>  </strong></p>
-            <p>Review : <strong>45</strong></p>
+            <p>Review : <strong>
+            <?php 
+                $total_result = $raccoons->getTotalReview( $raccoon->getId());
+                echo $total_result['total_review'];
+                
+             ?></strong></p>
             <br>
             <br>
             <br>
@@ -256,37 +268,6 @@
 
     });
 
-    // Insert commetst
-    
-    function ajax_posts() {
-
-        var username = document.getElementById("username").value;
-        var cmt = document.getElementById("review-text").value;
-        var rate = document.getElementById("rate-value").value;
-        var key_length = document.getElementById("user-number").value.length;
-        if( key_length != 4) {
-            alert( "length must be 4 numbers " );
-            return false;
-        }
-
-        var s_user_key  = document.getElementById("user-number").value;
-
-        $.ajax({
-                url : baseUrl + "api/review/" + update_userkey,
-                type : "put",
-                data : {
-                    username : username,
-                    cmt : cmt,
-                    rate : rate,
-                    s_user_key : user_key
-                },
-                success : function( response ) {
-                    // sir yo section ko data nai gaeraako xaena
-                }
-            });
-
-
-    }
 
     function detail(obj)
     {
@@ -307,7 +288,7 @@
                 var description = '';
                 description +='<p><big><strong>Description </strong></big> </p>';
                 description +='<p>Name              <strong> = '+ data.name +'</strong> </p>';
-                description +='<p>Total Review      <strong> = { sir yeha tyo raccon ko total review user ko coutn raakhne ho }</strong> </p>';
+                description +='<p>Total Review      <strong>7</strong> </p>';
                 description += '<p>Average Rating    <strong> = 4</strong> </p>';
                 $(".about-racs").html( description );
 
@@ -322,7 +303,7 @@
                 $(".sum-list").html( detail );
 
                 // Button
-                var button = '<button onclick="newSection()" id="bt-comment" >Click here to add your new Review</button>';
+                var button = '<button onclick="newSection('+ data.id +')" id="bt-comment" >Click here to add your new Review</button>';
                 $(".button").html( button );
 
                 var html = '';
@@ -373,18 +354,62 @@
         }
     }
 
-    function newSection()
+    function newSection( id )
     {
         document.getElementById("bt-comment").style.display = "none";
         document.getElementById("user-comment").style.display = "block";
-        window.location.href = "#comment-box-show";
+        window.location.href = "#comment-box-show/"+id;
         document.getElementById("username").focus();
     }
+
+    // Insert commetst
+    
+    function ajax_posts() {
+
+        var username = document.getElementById("username").value;
+        var cmt = document.getElementById("review-text").value;
+        var rate = document.getElementById("rate-value").value;
+        var key_length = document.getElementById("user-number").value.length;
+        if( key_length != 4) {
+            alert( "length must be 4 numbers " );
+            return false;
+        }
+
+
+        var s_user_key  = document.getElementById("user-number").value;
+
+        $.ajax({
+                url : baseUrl + "api/review/insert",
+                type : "post",
+                data : {
+                    username : username,
+                    cmt : cmt,
+                    rate : rate,
+                    s_user_key : s_user_key,
+                    id : id
+                },
+                success : function( response ) {
+
+                     
+                }
+            });
+
+    }
+
     function hideBox()
     {
         document.getElementById("user-comment").style.display = "none";
         document.getElementById("mg-section").style.textAlign = "center";
         document.getElementById("bt-comment").style.display = "block";
+        window.location.href = "http://localhost/Raccoon-review/"; 
+
+        $.ajax({
+                url: "http://localhost/Raccoon-review/",
+                success: function (result) {
+                    
+                    $(".main-item").html(result);
+                }
+            });
 
     }
     function changeOption(obj,id)
@@ -413,30 +438,28 @@
                 break;
 
             case "delete":
-                    var id = obj.getAttribute('data-id');
                     var txt;
                     var r = confirm("Are u sure want to delete this review ?");
                     if (r == true) {
                         
                         document.getElementById("update-rac").style.display = "none";
                         var user_key = prompt("Enter your key", "Your key");
-                        
-                        if( !isNaN(user_key) && !user_key == null ) {
-                                alert( user_key );
+                        if( !isNaN(user_key) && !(user_key == null) && ( user_key.length == 4) ) {
+
+
+                        $.ajax({
+                            url : baseUrl + "api/review/" + user_key,
+                            type : "delete",
+
+                            success : function( response ) {
+                                alert("Succesffully Deleted ! ");
+                            }
+                        });
+
                         } else {
-                            alert( "string or null number can't be accepted !" );
+                            alert( "string, null, less less than or greater that 4 length number can't be accepted !" );
                             return false;
                         }
-
-                        // sir delete garna ko laagi user ko id aako xa ra secrete code enter garepaxi check garera delete hanne ho 
-                        // $.ajax({
-                        //     url : baseUrl + "api/review/" + id,
-                        //     type : "delete",
-
-                        //     success : function( response ) {
-                        //         alert("Hello");
-                        //     }
-                        // });
 
                     } else {
                         txt = "Comments not deleted !";
@@ -450,6 +473,7 @@
                 break;
             case "null" :
                 document.getElementById("update-rac").style.display = "none";
+                document.getElementById("user-comment").style.display = "none";
                 document.getElementById("bt-comment").style.display = "block";      
                  break;
             default:
@@ -464,18 +488,19 @@
         var update_rate = document.getElementById("update-rate").value;
         var update_text = document.getElementById("update-text").value;
         var update_userkey = document.getElementById("update-key").value;
-        
+
         $.ajax({
-                url : baseUrl + "api/review/" + update_userkey,
+                url : baseUrl + "api/review/update",
                 type : "put",
                 data : {
                     update_name : update_name,
                     update_rate : update_rate,
-                    update_text : update_text
+                    update_text : update_text,
+                    update_userkey : update_userkey
                 },
                 success : function( response ) {
 
-                    // sir update code garda user ko secrete key check garera garne ho 
+                     
                 }
             });
 

@@ -110,11 +110,14 @@ class Review extends Db
 
     function save() {
 
+        echo "<br>";
+        print_r($_POST);
+        die();
         $this->insert( [
             'reviewer_name' => $this->getName(), 
             'viewer_key' => $this->getKey(),
             'review' => $this->getReviewText(),
-            'rating' => 1,
+            'rating' => $this->getRating(),
             'raccoon_id' => $this->getRacoonId()
         ] );
     }
@@ -138,20 +141,18 @@ class Review extends Db
         return json_encode( $reviewsArr );
     }
 
-    function delete ( $id ) {
+    function delete ( $key ) {
 
-        return parent::delete( $id );
+        return parent::delete( $key );
 
     }
 
-    function updateReview( $id ) {
+    function updateReview() {
 
         $putData = [];
         $put = file_get_contents('php://input');
         mb_parse_str( $put,  $putData);
-
-        $this->update( $id, $putData );
-
+        $this->update( $putData );
 
     }
 
