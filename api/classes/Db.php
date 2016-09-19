@@ -27,7 +27,9 @@ class Db
 
         $db = $this->getDB();
         $db->query($queryString);
+        $id = $db->insert_id;
         $db->close();
+       return $id;
 
     }
 
@@ -37,8 +39,9 @@ class Db
 
         $query = "update " . $this->table ." set ";
 
-        $query .= "reviewer_name = ".$data['update_name'].", rating = ".$data['update_rate'].", review = ".$data['update_text'];
-        $query .= " where viewer_key = ".$data['update_userkey'];
+        $query .= "reviewer_name = ".$data['reviewer_name'].", rating = ".$data['rating']
+            .", review = ".$data['review'];
+        $query .= " where viewer_key = ".$data['viewer_key'];
 
         $db = $this->getDB();
         $result = $db->query( $query );
@@ -144,8 +147,6 @@ class Db
         $db->close();
         return $result;
     }
-
-    
 
 
 }

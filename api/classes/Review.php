@@ -110,16 +110,28 @@ class Review extends Db
 
     function save() {
 
-        echo "<br>";
-        print_r($_POST);
-        die();
-        $this->insert( [
-            'reviewer_name' => $this->getName(), 
-            'viewer_key' => $this->getKey(),
-            'review' => $this->getReviewText(),
-            'rating' => $this->getRating(),
-            'raccoon_id' => $this->getRacoonId()
-        ] );
+        $review = new Review();
+        $review->setName( $_POST['reviewer_name']);
+        $review->setKey( $_POST['viewer_key']);
+        $review->setReviewText( $_POST['review']);
+        $review->setRating( $_POST['rating']);
+        $review->setRacoonId( $_POST['raccoon_id']);
+
+
+        $id = $this->insert( [
+            'reviewer_name' => $review->getName(),
+            'viewer_key' => $review->getKey(),
+            'review' => $review->getReviewText(),
+            'rating' => $review->getRating(),
+            'raccoon_id' => $review->getRacoonId()
+        ]);
+
+        $review->setId( $id );
+        return [
+            'status' => "success",
+            'message' => 'Review successfully saved',
+            'id' => $review->getId()
+        ];
     }
 
     function getAllReviews()
@@ -152,7 +164,23 @@ class Review extends Db
         $putData = [];
         $put = file_get_contents('php://input');
         mb_parse_str( $put,  $putData);
-        $this->update( $putData );
+
+        $review = new Review();
+        $review->setName( $putData['update_name']);
+        $review->setKey( $putData['update_userkey']);
+        $review->setReviewText( $putData['update_text']);
+        $review->setRating( $putData['update_rate']);
+        $review->setId( $putData['update_review_id'] );
+
+        $review->update(  ['reviewer_name' => $review->getName(),
+            'viewer_key' => $review->getKey(),
+            'review' => $review->getReviewText(),
+            'rating' => $review->getRating(),
+            'id' => $review->getId()
+        ]);
+
+
+
 
     }
 

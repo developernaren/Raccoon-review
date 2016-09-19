@@ -20,7 +20,7 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
     <script>
 
         function TimedRefresh( t ) {
-            setTimeout("location.reload(true);", t);
+//            setTimeout("location.reload(true);", t);
         }
 
         $(document).ready(function () {
