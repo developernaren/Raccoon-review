@@ -9,9 +9,9 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
     <meta charset="UTF-8">
     <!--	 <meta http-equiv="refresh" content="30"> -->
     <meta name="keywords" content="HTML, CSS, XML, JSON, JAVA SCRIPT">
-    <meta name="description" content="Review of Raccoon">
+    <meta name="description" content="Review of Bird">
     <meta name="author" content="Replace with ur name">
-    <title>Raccoon Review</title>
+    <title>Birds Review</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
     <script src="assets/js/jquery-1.12.4.min.js"></script>
     <script>
@@ -48,7 +48,7 @@ $baseUrl = str_replace("index.php", "", $_SERVER['REQUEST_SCHEME'] . "://" . $_S
 
 <header>
     <!-- Nav Logo -->
-    <div class="header_logo"><img src="assets/images/logo.jpg" alt="Reccoon Review"></div>
+    <div class="header_logo"><img src="assets/images/Athene_noctua_(cropped).jpg" alt="Bird Review"></div>
     <!-- Navbar Menu -->
     <div class="header-menu">
         <ul>
