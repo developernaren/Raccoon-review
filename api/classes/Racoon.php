@@ -14,6 +14,8 @@ class Racoon extends Db
     public $id;
     public $reviews;
     public $total;
+    public $averageRating;
+
     protected $table = "tbl_raccoon";
 
 
@@ -22,6 +24,22 @@ class Racoon extends Db
         $this->setId( $id );
         $this->setName( $name );
         $this->setImageUrl( $imageUrl );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAverageRating()
+    {
+        return $this->averageRating;
+    }
+
+    /**
+     * @param mixed $averageRating
+     */
+    public function setAverageRating($averageRating)
+    {
+        $this->averageRating = $averageRating;
     }
 
     public function getTotalRe()
@@ -160,8 +178,22 @@ class Racoon extends Db
         if( $result->num_rows > 0 ) {
             $row = $result->fetch_assoc();
             $raccoon = new self( $row['id'], $row['name'], $row['image_url']);
-            $raccoon->getReviews();
+            $reviews = $raccoon->getReviews();
             $raccoon->getTotal();
+
+            $totalRating = 0;
+            $reviewRating = 0;
+            foreach( $reviews as $review ) {
+                ++$totalRating;
+                $reviewRating += $review->getRating();
+            }
+
+            if( empty( $reviewRating ) ) {
+                $raccoon->setAverageRating( 0 );
+            } else {
+                $raccoon->setAverageRating( $reviewRating / ( $totalRating ) );
+            }
+
         }
 
         return json_encode( $raccoon );

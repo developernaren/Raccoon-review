@@ -301,7 +301,7 @@ include("includes/header.php");
             description += '<p><big><strong>Description </strong></big> </p>';
             description += '<p>Name              <strong> = ' + data.name + '</strong> </p>';
             description += '<p>Total Review      <strong>7</strong> </p>';
-            description += '<p>Average Rating    <strong> = 4</strong> </p>';
+            description += '<p>Average Rating    <strong> = '+ data.averageRating +'</strong> </p>';
             $(".about-racs").html(description);
 
             // User comments
