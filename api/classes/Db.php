@@ -3,7 +3,7 @@
 class Db
 {
 
-    const DB_NAME = "db_reccoon_review";
+    const DB_NAME = "bird_review";
     const DB_HOST = "localhost";
     const DB_USERNAME = "root";
     const DB_PASSWORD = "";
@@ -64,7 +64,7 @@ class Db
     function totalResult()
     {
         $db = $this->getDB();
-        $total = $db->query('select count(id) as cnt from tbl_raccoon');
+        $total = $db->query('select count(id) as cnt from birds');
         $db->close();
         return $total;
 
@@ -106,7 +106,7 @@ class Db
     function getByRateHigh()
     {
         $db = $this->getDB();
-        $result = $db->query('select sum( rating ) as totalRating,b.* from review as a join tbl_raccoon as b on a.raccoon_id = b.id group by raccoon_id order by totalRating desc');
+        $result = $db->query('select sum( rating ) as totalRating,b.* from bird_review as a join birds as b on a.birds_id = b.id group by birds_id order by totalRating desc');
         $db->close();
         return $result;   
     }
@@ -114,7 +114,7 @@ class Db
     function getByRateLow()
     {
         $db = $this->getDB();
-        $result = $db->query('select sum( rating ) as totalRating,b.* from review as a join tbl_raccoon as b on a.raccoon_id = b.id group by raccoon_id order by totalRating asc');
+        $result = $db->query('select sum( rating ) as totalRating,b.* from bird_review as a join birds as b on a.birds_id = b.id group by birds_id order by totalRating asc');
         $db->close();
         return $result;
     }
@@ -122,7 +122,7 @@ class Db
     function total_review( $id )
     {
         $db = $this->getDB();
-        $result = $db->query('select count(*) as total_review from review where raccoon_id = '.$id);
+        $result = $db->query('select count(*) as total_review from bird_review where birds_id = '.$id);
         $db->close();
         return $result;
 

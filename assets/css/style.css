@@ -16,13 +16,10 @@ header .header_logo img
     height: 120px;
     box-sizing: border-box;
     border-radius: 50%;
-    border-top: 3px solid darkcyan;
-    border-bottom: 3px solid darkcyan;
+    border: 4px solid #d35400;
 }
 header .header-menu 
 {
-    border-top: 2px solid darkcyan;
-    border-bottom: 2px solid darkcyan;
     text-align: center;
 }
 header .header-menu ul li
@@ -34,18 +31,19 @@ header .header-menu ul li a
 {
     text-decoration: none;
     font-size: 1.1em;
-    color: darkcyan;
+    color: #d35400;
     padding: 13px;
-    -webkit-transition:all linear 0.2s;
-       -moz-transition:all linear 0.2s;
-        -ms-transition:all linear 0.2s;
-         -o-transition:all linear 0.2s;
-            transition:all linear 0.2s;
+    -webkit-transition:all linear 0.1s;
+       -moz-transition:all linear 0.1s;
+        -ms-transition:all linear 0.1s;
+         -o-transition:all linear 0.1s;
+            transition:all linear 0.1s;
 }
 header .header-menu ul li a:hover
 {
-    background-color: darkcyan;
+    background-color: #d35400;
     color: #fff;
+    border-radius:3px;
     cursor: pointer;
 }
 
@@ -95,9 +93,10 @@ section .about-racs p
 }
 section .about-racs
 {
-    background-color: darkcyan;
-    margin-left: 50px;
-    width: 90%;
+    background-color: #d35400;
+    display: inline-block;
+    margin-left: 600px;
+    border-radius: 3px;
 }
 
 section .about-rac .about-rac-image 
@@ -121,9 +120,7 @@ section .rac-container .rac-info
 {    
     color: #fff;
     padding:5px 30px;
-    margin-left: 50px;
-    width: 86.5%;
-    background-color: darkcyan;
+    background-color: #d35400;
 }
 section .rac-container .rac-info span:nth-child(1)
 {
@@ -140,7 +137,7 @@ section .rac-container .rac-info span:nth-child(2) select
     padding: 5px;
     outline-style: none;
     font-size: 13px;
-    color: darkcyan;
+    color: #d35400;
 }
 section .rac-container .rac-info span:nth-child(2) #nameSort
 {
@@ -155,14 +152,13 @@ section .rac-container .rac-list
 {
     margin: 20px 0px 20px 57px;
     position: relative;
-    display: inline-block;
     padding: 10px 6px;
     box-sizing: border-box;
     border-left-width: 5px;
     clear: both;
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    border: 1px solid darkcyan;
+    border: 1px solid #d35400;
 }
 section .rac-container .rac-list p
 {
@@ -172,7 +168,7 @@ section .rac-container .rac-list p
 }
 section .rac-container .rac-list a
 {
-    background-color: forestgreen;
+    background-color: #e74c3c;
     color: #fff;
     font-weight:400;
     padding: 5px 10px;
@@ -190,13 +186,27 @@ section .rac-container .rac-list a
 }
 section .rac-container .rac-list img
 {
-    height: 200px;
-    width: 200px;
+    height:150px;
+    box-sizing:border-box;
     float: right;
+    border: 5px solid #bdc3c7;
+    margin-top: -10px;
     border-radius: 2px;
     -webkit-border-radius: 2px;
+    -webkit-transition: all linear 0.4s ;
+       -moz-transition: all linear 0.4s ;
+        -ms-transition: all linear 0.4s ;
+         -o-transition: all linear 0.4s ;
+            transition: all linear 0.4s ;
 }
 
+section .rac-container .rac-list img:hover { 
+    -webkit-transform: scale(1.2, 1.2);
+       -moz-transform: scale(1.2, 1.2);
+        -ms-transform: scale(1.2, 1.2);
+         -o-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+}
 
 
 section .rac-container .rac-pagination
@@ -258,7 +268,7 @@ section .rac-container .rac-pagination ul li a:hover
 {
     width: 90%;
     margin-left: 50px;
-    background-color: darkcyan;
+    background-color: #d35400;
 }
 .detail-container .sum-list p
 {
@@ -277,10 +287,10 @@ osition: relative;*/
     width: 900px;
     box-sizing: border-box;
     margin-left:300px;
-    border-top: 5px solid forestgreen;
-    -webkit-border-top: 5px solid forestgreen;
-    border-bottom: 5px solid forestgreen;
-    -webkit-border-bottom: 5px solid forestgreen;
+    border-top: 5px solid #2c3e50;
+    -webkit-border-top: 5px solid #2c3e50;
+    border-bottom: 5px solid #2c3e50;
+    -webkit-border-bottom: 5px solid #2c3e50;
 }
 .detail-container .about-rac
 {
@@ -305,12 +315,12 @@ osition: relative;*/
     text-align: center;
     font-family: Roboto slab;
     font-size: 18px;
-    color: orangered;
+    color: #2c3e50;
 }
 .detail-container .user-review .user-rac-rate 
 {
     width: 93%;
-    border: 1px solid orange;
+    border: 1px solid #2c3e50;
     border-radius: 3px;
     clear: both;
     margin-top: 10px;
@@ -371,7 +381,7 @@ osition: relative;*/
 }
 .detail-container .user-review .user-rac-rate p:first-child
 {
-    background-color: orange;
+    background-color: #2c3e50;
     color: #fff;
     padding: 6px;
     margin: 0px;
@@ -399,13 +409,13 @@ osition: relative;*/
     padding: 8px 35px;
     font-family: sans-serif;
     border-radius: 3px;
-    border: 2px solid darkcyan;
+    border: 2px solid #2c3e50;
     cursor: pointer;
     font-size: 13px;
 }
 .detail-container .new-review-button button:hover
 {
-    background-color: darkcyan;
+    background-color: #2c3e50;
     color: #fff;
 }
 .detail-container .new-review-button .user-comment
@@ -477,14 +487,14 @@ osition: relative;*/
     padding: 4px 25px;
     font-family: sans-serif;
     border-radius: 3px;
-    border: 2px solid darkcyan;
+    border: 2px solid #2c3e50;
     cursor: pointer;
     font-size: 12px;   
 }
 
 .detail-container .new-review-button .user-comment input[type="submit"]:hover,input[type="button"]:hover
 {
-    background-color: darkcyan;
+    background-color: #2c3e50;
     color: #fff;
 }
 

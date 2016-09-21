@@ -3,12 +3,12 @@
 class Review extends Db
 {
 
-    protected $table = 'review';
+    protected $table = 'bird_review';
 
     public $name;
     public $key;
     public $reviewText;
-    public $racoonId;
+    public $birdId;
     public $rating;
     public $id;
 
@@ -95,17 +95,17 @@ class Review extends Db
     /**
      * @return mixed
      */
-    public function getRacoonId()
+    public function getBirdId()
     {
-        return $this->racoonId;
+        return $this->birdId;
     }
 
     /**
      * @param mixed $racoonId
      */
-    public function setRacoonId($racoonId)
+    public function setBirdId($birdId)
     {
-        $this->racoonId = $racoonId;
+        $this->birdId = $birdId;
     }
 
     function save() {
@@ -115,7 +115,7 @@ class Review extends Db
         $review->setKey( $_POST['viewer_key']);
         $review->setReviewText( $_POST['review']);
         $review->setRating( $_POST['rating']);
-        $review->setRacoonId( $_POST['raccoon_id']);
+        $review->setBirdId( $_POST['birds_id']);
 
 
         $id = $this->insert( [
@@ -123,7 +123,7 @@ class Review extends Db
             'viewer_key' => $review->getKey(),
             'review' => $review->getReviewText(),
             'rating' => $review->getRating(),
-            'raccoon_id' => $review->getRacoonId()
+            'birds_id' => $review->getBirdId()
         ]);
 
         $review->setId( $id );
@@ -146,7 +146,7 @@ class Review extends Db
             $review->setId( $row['id']);
             $review->setName("Narendra");
             $review->setReviewText("this is aweoine");
-            $review->setRacoonId('1');
+            $review->setBirdId('1');
             $reviewsArr[] = $review;
 
         }

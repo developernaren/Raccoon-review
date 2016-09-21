@@ -1,49 +1,10 @@
 <?php
 require_once "api/classes/Db.php";
-require_once "api/classes/Racoon.php";
+require_once "api/classes/Bird.php";
 include("includes/header.php");
 ?>
 <section class="main-item">
 
-    <!-- About Raccoons   -->
-    <div class="about-rac">
-        <div class="about-rac-para">
-            <h2>Reccoon</h2>
-            <p>
-                The word "raccoon" was adopted into English from the native Powhatan term, as used in the Virginia
-                Colony. It was recorded on Captain John Smith's list of Powhatan words as aroughcun, and on that of
-                William Strachey as arathkone.It has also been identified as a Proto-Algonquian root *ahrah-koon-em,
-                meaning one who rubs, scrubs and scratches with its hands".
-
-                Similarly, Spanish colonists adopted the Spanish word mapache from the Nahuatl mapachitli of the Aztecs,
-                meaning one who takes everything in its hands".In many languages, the raccoon is named for its
-                characteristic dousing behavior in conjunction with that language's term for bear, for example Waschbär
-                in German, orsetto lavatore in Italian, mosómedve in Hungarian and araiguma (アライグマ) in Japanese. In
-                French and European Portuguese, the washing behavior is combined with these languages' term for rat,
-                yielding, respectively, raton laveur and ratão-lavadeiro. The raccoon's scientific name, Procyon lotor,
-                is neo-Latin, meaning "before-dog washer", with lotor Latin for "washer" and Procyon Latinized Greek
-                from προ-, "before" and κύων, "dog".
-
-                The colloquial abbreviation coon is used in words like coonskin for fur clothing and in phrases like old
-                coon as a self-designation of trappers.In the 1830s, the U.S. Whig Party used the raccoon as an emblem,
-                causing them to be pejoratively known as 'coons' by their political opponents, who saw them as too
-                sympathetic to African-Americans. Soon after that it became an ethnic slur,[14] especially in use
-                between 1880 and 1920 (see coon song), and the term is still considered offensive.
-
-                The original habitats of the raccoon are deciduous and mixed forests, but due to their adaptability they
-                have extended their range to mountainous areas, coastal marshes, and urban areas, where some homeowners
-                consider them to be pests. As a result of escapes and deliberate introductions in the mid-20th century,
-                raccoons are now also distributed across mainland Europe, Caucasia, and Japan.
-
-            </p>
-        </div>
-        <div class="about-rac-image">
-            <figure>
-                <img src="assets/images/Raccoon_(Procyon_lotor)_2.jpg" alt="Raccoon Name">
-                <figcaption>Procyon Lotor</figcaption>
-            </figure>
-        </div>
-    </div>
 
     <!-- Main Raccoons contents with sorting  -->
     <div id="status"></div>
@@ -52,10 +13,10 @@ include("includes/header.php");
         <div class="rac-info">
             <span>Total result <strong>: <?php
 
-                    $raccoons = new Racoon();
+                    $bird = new Bird();
 
-                    $total_result = $raccoons->getTotal();
-                    $total = $raccoons->total;
+                    $total_result = $bird->getTotal();
+                    $total = $bird->total;
                     echo $total;
 
                     ?></strong> </span>
@@ -84,27 +45,27 @@ include("includes/header.php");
         <div class="php-loop">
             <?php
 
-            $result = $raccoons->getAllRaccoons();
+            $result = $bird->getAllBirds();
 
-            foreach ($result as $raccoon) {
+            foreach ($result as $bird) {
 
                 ?>
 
                 <div class="rac-list" id="first-rac">
 
-                    <img src="<?php echo $raccoon->getImageUrl(); ?>" alt="Procyan Lator">
-                    <p>Name : <strong><?php echo $raccoon->getName(); ?>  </strong></p>
+                    <img src="<?php echo $bird->getImageUrl(); ?>" alt="">
+                    <p>Name : <strong><?php echo $bird->getName(); ?>  </strong></p>
                     <p>Review : <strong>
                             <?php
-                            $total_result = $raccoons->getTotalReview($raccoon->getId());
+                            $total_result = $bird->getTotalReview($bird->getId());
                             echo $total_result['total_review'];
 
                             ?></strong></p>
                     <br>
                     <br>
                     <br>
-                    <a id="#hrefs" value="<?php echo $raccoon->getId(); ?>"
-                       onclick="detail(<?php echo $raccoon->getId(); ?>)">Detail about Raccon</a>
+                    <a id="#hrefs" value="<?php echo $bird->getId(); ?>"
+                       onclick="detail(<?php echo $bird->getId(); ?>)">Detail about Raccon</a>
                 </div>
             <?php } ?>
 
@@ -172,14 +133,15 @@ include("includes/header.php");
 
         </div>
     </div>
-</div>
+</div> 
 <script>
-    var raccoonId = '';
+
+    var birdId = '';
     var reviewId = '';
     $(".rac-container .rac-info #nameSort #asc").click(function () {
 
         $(".php-loop").hide();
-        var url = baseUrl + "api/raccoon/sortByAsc";
+        var url = baseUrl + "api/bird/sortByAsc";
         $.get(url, function (data, status) {
             var data = JSON.parse(data);
             var asc = '';
@@ -207,7 +169,7 @@ include("includes/header.php");
     $(".rac-container .rac-info #nameSort #desc").click(function () {
 
         $(".php-loop").hide();
-        var url = baseUrl + "api/raccoon/getBySortByDesc";
+        var url = baseUrl + "api/bird/getBySortByDesc";
         $.get(url, function (data, status) {
             var data = JSON.parse(data);
             var asc = '';
@@ -234,7 +196,7 @@ include("includes/header.php");
     $(".rac-container .rac-info #ratingSort #highest").click(function () {
 
         $(".php-loop").hide();
-        var url = baseUrl + "api/raccoon/getByRateHigh";
+        var url = baseUrl + "api/bird/getByRateHigh";
         $.get(url, function (data, status) {
             var data = JSON.parse(data);
             var asc = '';
@@ -261,7 +223,7 @@ include("includes/header.php");
     $(".rac-container .rac-info #ratingSort #lowest").click(function () {
 
         $(".php-loop").hide();
-        var url = baseUrl + "api/raccoon/getByRateLow";
+        var url = baseUrl + "api/bird/getByRateLow";
         $.get(url, function (data, status) {
             var data = JSON.parse(data);
             var asc = '';
@@ -285,11 +247,11 @@ include("includes/header.php");
 
     function detail(obj) {
 
-        var url = baseUrl + "api/raccoon/" + obj;
+        var url = baseUrl + "api/bird/" + obj;
         $.get(url, function (data, status) {
             var data = JSON.parse(data);
             data = JSON.parse(data);
-            raccoonId = obj;
+            birdId = obj;
             // Rating
             // (252*5 + 124*4 + 40*3 + 29*2 + 33*1) / (252 + 124 + 40 + 29 + 33)
             //
@@ -322,7 +284,7 @@ include("includes/header.php");
             $.each(data.reviews, function (key, review) {
 
 
-                html += '<div class="user-rac-rate" id="2">';
+                html += '<div class="user-rac-rate" id="rac-'+review.id+'">';
                 html += '<p>Username = <strong>' + review.name + '</strong> &nbsp;&nbsp;&nbsp;&nbsp;Rating = <strong>' + review.rating + '</strong>';
                 html += '<select '
                 html += 'data-id="' + review.id + '"';
@@ -339,6 +301,7 @@ include("includes/header.php");
             })
 
 
+            document.getElementById("user-comment").style.display = "none";
             $("#review-wrapper-div").html(html);
         });
 
@@ -396,7 +359,7 @@ include("includes/header.php");
                 'viewer_key': s_user_key,
                 'review': cmt,
                 'rating': rate,
-                'raccoon_id' : raccoonId
+                'birds_id' : birdId
             },
             success : function (response) {
                 response = JSON.parse( response );
@@ -415,6 +378,9 @@ include("includes/header.php");
                 html += cmt;
                 html += '</p></div>';
 
+
+                document.getElementById("user-comment").style.display = "none";
+                document.getElementById("bt-comment").style.display = "block";
                 $("#review-wrapper-div").append( html);
             }
         });
@@ -425,10 +391,10 @@ include("includes/header.php");
         document.getElementById("user-comment").style.display = "none";
         document.getElementById("mg-section").style.textAlign = "center";
         document.getElementById("bt-comment").style.display = "block";
-        window.location.href = "http://localhost/Raccoon-review/";
+        window.location.href = "http://localhost/Birds/";
 
         $.ajax({
-            url: "http://localhost/Raccoon-review/",
+            url: "http://localhost/Birds/",
             success: function (result) {
 
                 $(".main-item").html(result);
@@ -476,7 +442,7 @@ include("includes/header.php");
 
                             success: function (response) {
                                 alert("Successfully Deleted ! ");
-                                $this.closest('div').remove();
+                                $("#rac-"+reviewId).remove();
                             }
                         });
 
@@ -513,7 +479,7 @@ include("includes/header.php");
         var update_text = document.getElementById("update-text").value;
         var update_userkey = document.getElementById("update-key").value;
         $.ajax({
-            url: baseUrl + "api/review/update",
+            url: baseUrl + "api/bird/update",
             type: "put",
             data: {
                 update_name: update_name,

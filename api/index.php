@@ -3,24 +3,24 @@
 require_once 'classes/Db.php';
 require_once 'classes/Review.php';
 require_once 'classes/Route.php';
-require_once 'classes/Racoon.php';
+require_once 'classes/Bird.php';
 require_once 'classes/Response.php';
 
-Route::get('raccoons', 'Racoon@getAllRaccoons');
-Route::get('', 'Racoon@getAllRaccoons');
-Route::get('home', 'Racoon@getAllRaccoons');
+Route::get('bird', 'Bird@getAllBirds');
+Route::get('', 'Bird@getAllBirds');
+Route::get('home', 'Bird@getAllBirds');
 Route::get('review', 'Review@getAllReviews');
-Route::get('raccoon/{num}', 'Racoon@getOne');
-Route::get('raccoon/sortByAsc','Racoon@sortByAsc');
-Route::get('raccoon/getBySortByDesc','Racoon@sortByDesc');
-Route::get('raccoon/getRating','Racoon@getRatings');
+Route::get('bird/{num}', 'Bird@getOne');
+Route::get('bird/sortByAsc','Bird@sortByAsc');
+Route::get('bird/getBySortByDesc','Bird@sortByDesc');
+Route::get('bird/getRating','Bird@getRatings');
 
 Route::post('review/insert','Review@save');
 Route::delete('review/{num}', 'Review@delete');
 Route::put('review/update', 'Review@updateReview');
 
-Route::get('raccoon/getByRateHigh','Racoon@getByRateHighs');
-Route::get('raccoon/getByRateLow','Racoon@getByRateLows');
+Route::get('bird/getByRateHigh','Bird@getByRateHighs');
+Route::get('bird/getByRateLow','Bird@getByRateLows');
 
 
 $server = $_SERVER;
