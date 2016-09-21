@@ -14,6 +14,7 @@ class Racoon extends Db
     public $id;
     public $reviews;
     public $total;
+    public $totalReview;
     public $averageRating;
 
     protected $table = "tbl_raccoon";
@@ -181,17 +182,43 @@ class Racoon extends Db
             $reviews = $raccoon->getReviews();
             $raccoon->getTotal();
 
-            $totalRating = 0;
-            $reviewRating = 0;
+            $ones = 0;
+            $twos = 0;
+            $threes = 0;
+            $fours = 0;
+            $fives = 0;
+            $reviewCnt = 0;
+
             foreach( $reviews as $review ) {
-                ++$totalRating;
-                $reviewRating += $review->getRating();
+                ++$reviewCnt;
+                switch( $review->getRating() ) {
+                    case 1:
+                        ++$ones;
+                        break;
+                    case 2:
+                        ++$twos;
+                        break;
+                    case 3:
+                        ++$threes;
+                        break;
+                    case 4:
+                        ++$fours;
+                        break;
+                    case 5:
+                        ++$fives;
+                        break;
+                }
             }
 
+            $reviewRating = ( $ones + ( $twos * 2) + ( $threes * 3 ) + ( $fours * 4 ) + ( $fives * 5 ) )
+                                 /
+                ( $ones + $twos + $threes + $fours + $fives );
+
+            $raccoon->totalReview = $reviewCnt;
             if( empty( $reviewRating ) ) {
                 $raccoon->setAverageRating( 0 );
             } else {
-                $raccoon->setAverageRating( $reviewRating / ( $totalRating ) );
+                $raccoon->setAverageRating( round( $reviewRating,2 ) );
             }
 
         }
